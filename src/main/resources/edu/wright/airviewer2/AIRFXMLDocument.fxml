@@ -24,6 +24,14 @@
               <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
+           <Menu mnemonicParsing="false" text="Convert">
+            <items>
+                  <MenuItem fx:id="convertIntoJPEG" mnemonicParsing="false" text=" to JPEG">
+                  </MenuItem>
+                  <MenuItem fx:id="convertIntoPNG" mnemonicParsing="false" text="to PNG">
+                  </MenuItem>
+            </items>
+          </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
                   <MenuItem fx:id="undoMenuItem" mnemonicParsing="false" text="Undo">
