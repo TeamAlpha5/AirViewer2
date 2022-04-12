@@ -21,6 +21,8 @@
                   <MenuItem fx:id="saveAsMenuItem" mnemonicParsing="false" text="Save As ...">
                   </MenuItem>
                   <MenuItem fx:id="extractTextMenuItem" mnemonicParsing="false" text="Extract Text ..." />
+                  <MenuItem fx:id="rotateMenuItem" mnemonicParsing="false" text="Rotate" />
+
               <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
