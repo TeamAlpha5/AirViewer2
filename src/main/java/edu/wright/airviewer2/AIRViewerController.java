@@ -7,58 +7,14 @@ package edu.wright.airviewer2;
 
 import edu.wright.airviewer2.AIRViewer;
 import java.io.File;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-
-import java.io.FileNotFoundException;
-
 import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import org.apache.pdfbox.multipdf.PDFMergerUtility;
-import org.apache.pdfbox.multipdf.Splitter;
-import org.apache.pdfbox.pdmodel.PDDocument;
-
 import java.util.UUID;
-
-
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-
-import com.itextpdf.layout.*;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
-import com.itextpdf.io.image.ImageData;
-import com.itextpdf.io.image.ImageDataFactory;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.borders.SolidBorder;
-import com.itextpdf.layout.element.Cell;
-import com.itextpdf.layout.element.Image;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
-import com.itextpdf.layout.properties.TextAlignment;
-import com.itextpdf.layout.properties.UnitValue;
-import com.itextpdf.layout.properties.VerticalAlignment;
-
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-
-import org.apache.pdfbox.multipdf.PDFMergerUtility;
-
-import com.itextpdf.text.DocumentException;
-
-
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -74,31 +30,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Rotate;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-import com.itextpdf.kernel.colors.ColorConstants;
-import com.itextpdf.kernel.colors.DeviceCmyk;
-import com.itextpdf.kernel.colors.DeviceGray;
-import com.itextpdf.kernel.exceptions.PdfException;
-import com.itextpdf.kernel.geom.PageSize;
-import com.itextpdf.kernel.pdf.EncryptionConstants;
-import com.itextpdf.kernel.pdf.PdfArray;
-import com.itextpdf.kernel.pdf.PdfDictionary;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfName;
-import com.itextpdf.kernel.pdf.PdfNumber;
-import com.itextpdf.kernel.pdf.PdfObject;
-import com.itextpdf.kernel.pdf.PdfPage;
-import com.itextpdf.kernel.pdf.PdfReader;
-import com.itextpdf.kernel.pdf.PdfStream;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.kernel.pdf.WriterProperties;
-import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
-
-import java.io.File;
 
 /**
  *
@@ -119,10 +53,6 @@ public class AIRViewerController implements Initializable {
 
     @FXML
     private MenuItem closeMenuItem;
-    @FXML
-    private MenuItem convertIntoJPEG;
-    @FXML
-    private MenuItem convertIntoPNG;
 
     @FXML
     private MenuItem extractTextMenuItem;
@@ -135,9 +65,6 @@ public class AIRViewerController implements Initializable {
 
     @FXML
     private MenuItem addBoxAnnotationMenuItem;
-    
-    @FXML
-    private MenuItem scrollMenuItem;
 
     @FXML
     private MenuItem addEllipseAnnotationMenuItem;
@@ -147,19 +74,12 @@ public class AIRViewerController implements Initializable {
 
     @FXML
     private MenuItem deleteAnnotationMenuItem;
-    
-    @FXML
-    private MenuItem rotateMenuItem; 
-     
-   
+
     private AIRViewerModel model;
+
     private ImageView currentPageImageView;
 
     private Group pageImageGroup;
-    
-    private String fileName=null;
-    
-    private String anFile=null;
 
     private AIRViewerModel promptLoadModel(String startPath) {
 
@@ -172,8 +92,6 @@ public class AIRViewerController implements Initializable {
             File file = fileChooser.showOpenDialog(stage);
             if (null != file) {
                 String path = file.getCanonicalPath();
-                System.out.println("Path:"+path);
-                fileName=path;
                 loadedModel = new AIRViewerModel(Paths.get(path));
             }
         } catch (IOException ex) {
@@ -225,15 +143,11 @@ public class AIRViewerController implements Initializable {
         assert openMenuItem != null : "fx:id=\"openMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert saveAsMenuItem != null : "fx:id=\"saveAsMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-        assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
 
-        assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
-        assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
         assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert undoMenuItem != null : "fx:id=\"undoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert redoMenuItem != null : "fx:id=\"redoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addBoxAnnotationMenuItem != null : "fx:id=\"addBoxAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-        assert scrollMenuItem != null : "fx:id=\"scrollMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addEllipseAnnotationMenuItem != null : "fx:id=\"addEllipseAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addTextAnnotationMenuItem != null : "fx:id=\"addTextAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert deleteAnnotationMenuItem != null : "fx:id=\"deleteAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -248,7 +162,6 @@ public class AIRViewerController implements Initializable {
             redoMenuItem.setDisable(!model.getCanRedo());
             redoMenuItem.setText("Redo " + model.getSuggestedRedoTitle());
             addBoxAnnotationMenuItem.setDisable(false);
-            scrollMenuItem.setDisable(false);
             addEllipseAnnotationMenuItem.setDisable(false);
             addTextAnnotationMenuItem.setDisable(false);
             deleteAnnotationMenuItem.setDisable(0 >= model.getSelectionSize());
@@ -298,7 +211,6 @@ public class AIRViewerController implements Initializable {
             undoMenuItem.setDisable(true);
             redoMenuItem.setDisable(true);
             addBoxAnnotationMenuItem.setDisable(true);
-            scrollMenuItem.setDisable(true);
             addEllipseAnnotationMenuItem.setDisable(true);
             addTextAnnotationMenuItem.setDisable(true);
             deleteAnnotationMenuItem.setDisable(true);
@@ -311,24 +223,17 @@ public class AIRViewerController implements Initializable {
         assert openMenuItem != null : "fx:id=\"openMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert saveAsMenuItem != null : "fx:id=\"saveAsMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-        assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-        
-        
-        
 
-
-        assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
-        assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
         assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert undoMenuItem != null : "fx:id=\"undoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert redoMenuItem != null : "fx:id=\"redoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addBoxAnnotationMenuItem != null : "fx:id=\"addBoxAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-        assert scrollMenuItem != null : "fx:id=\"scrollMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addEllipseAnnotationMenuItem != null : "fx:id=\"addEllipseAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addTextAnnotationMenuItem != null : "fx:id=\"addTextAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert deleteAnnotationMenuItem != null : "fx:id=\"deleteAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
 
         model = aModel;
+
         openMenuItem.setOnAction((ActionEvent e) -> {
             System.out.println("Open ...");
             reinitializeWithModel(promptLoadModel(AIRViewerController.DEFAULT_PATH));
@@ -339,98 +244,7 @@ public class AIRViewerController implements Initializable {
             Platform.exit();
         });
         closeMenuItem.setDisable(false);
-        
-              
-        
-        rotateMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                //int pageIndex = pagination.getCurrentPageIndex();
-                FileInputStream fis = null;
-                FileOutputStream fos = null;
-         
-                // Try block to check for exceptions
-                try {
-         
-                    // Initializing both the streams with
-                    // respective file directory on local machine
-         
-                    // Custom directory path on local machine
-                    fis = new FileInputStream(
-                        fileName);
-         
-                    // Custom directory path on local machine
-                    fos = new FileOutputStream(
-                        fileName+"-1");
-         
-                    anFile=fileName+"-1";
-                    int c;
-                    while ((c = fis.read()) != -1) {
-                    	 
-                        // Writing to output file of the specified
-                        // directory
-                        fos.write(c);
-                    }
-         
-                }catch(Exception e1) {
-                	System.out.println(e1);
-                }
-                File file = new File(fileName+"-rotate.pdf");
-                file.getParentFile().mkdirs();
-                try {
-					rotatePdf(fileName+"-rotate.pdf");
-					
-					///////copy fileName+"-rotate.pdf" to fileName and airview the fileName/////
-			
-				         
-	                    // Initializing both the streams with
-	                    // respective file directory on local machine
-	         
-	                    // Custom directory path on local machine
-	                    fis = new FileInputStream(
-	                        fileName+"-rotate.pdf");
-	         
-	                    // Custom directory path on local machine
-	                    fos = new FileOutputStream(
-	                        fileName);
-	         
-	                    anFile=fileName;
-	                    int c;
-	                    while ((c = fis.read()) != -1) {
-	                    	 
-	                        // Writing to output file of the specified
-	                        // directory
-	                        fos.write(c);
-	                    }
-	         
-	                
-					///////////////////////////////////////////////
-					
-					
-					  AIRViewerModel loadedModel1 = null;
-					  loadedModel1 = new AIRViewerModel(Paths.get(fileName+"-rotate.pdf"));
-					  reinitializeWithModel(loadedModel1);
-					  
-					  
-					  
-					  //displaying original one
-					  AIRViewerModel loadedModel2 = null;
-					  loadedModel2 = new AIRViewerModel(Paths.get(fileName));
-					  reinitializeWithModel(loadedModel2);
-					  
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-               // RotateViewerModel.rotate();
-               // refreshUserInterface();
-            }
-        });
-        rotateMenuItem.setDisable(false);
-        
 
-        
-        
         if (null != model) {
             Stage stage = AIRViewer.getPrimaryStage();
             assert null != stage;
@@ -453,44 +267,10 @@ public class AIRViewerController implements Initializable {
                 FileChooser fileChooser = new FileChooser();
                 FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
                 fileChooser.getExtensionFilters().add(extFilter);
-                
-                //System.out.println(fileChooser.getInitialDirectory());
-                
-                System.out.println();
                 File file = fileChooser.showSaveDialog((Stage) pagination.getScene().getWindow());
-                System.out.println(file.getAbsolutePath());
-                
                 if (null != file) {
                     model.save(file);
                 }
-            });
-            convertIntoJPEG.setOnAction((ActionEvent event) -> {
-                try {
-					JPEG a=new JPEG(model.getStrPath());
-					a.jpeg();
-                    refreshUserInterface();
-				} catch (IOException | DocumentException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} 
-                
-            });
-            convertIntoPNG.setOnAction((ActionEvent event) -> {
-                try {
-                	PNG a=new PNG(model.getStrPath());
-					a.png();
-                    refreshUserInterface();
-				} catch (IOException | DocumentException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} 
-                
             });
             extractTextMenuItem.setOnAction((ActionEvent e) -> {
                 System.out.println("extractTextMenuItem ...");
@@ -512,15 +292,10 @@ public class AIRViewerController implements Initializable {
                     refreshUserInterface();
                 }
             });
-            
-            
-            
-            
-            
             addEllipseAnnotationMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
-                    int pageIndex = pagination.getCurrentPageIndex();             
+                    int pageIndex = pagination.getCurrentPageIndex();
                     model.executeDocumentCommandWithNameAndArgs("AddCircleAnnotation",
                             new String[]{Integer.toString(pageIndex), "288", "576", "144.0", "72.0", "Sample Text!"});
                     refreshUserInterface();
@@ -532,7 +307,6 @@ public class AIRViewerController implements Initializable {
                     int pageIndex = pagination.getCurrentPageIndex();
                     model.executeDocumentCommandWithNameAndArgs("AddTextAnnotation",
                             new String[]{Integer.toString(pageIndex), "36", "576", "144.0", "19.0", "A Bit More Sample Text!"});
-                    
                     refreshUserInterface();
                 }
             });
@@ -563,29 +337,5 @@ public class AIRViewerController implements Initializable {
         });
 
     }
-    
-    
-       
-    protected void rotatePdf(String dest) throws Exception {
-        PdfDocument pdfDoc = new PdfDocument(new PdfReader(anFile), new PdfWriter(fileName+"-rotate.pdf"));
 
-        for (int p = 1; p <= pdfDoc.getNumberOfPages(); p++) {
-            PdfPage page = pdfDoc.getPage(p);
-            int rotate = page.getRotation();
-            if (rotate == 0) {
-                page.setRotation(90);
-            } else {
-                page.setRotation((rotate + 90) % 360);
-            }
-        }
-
-        pdfDoc.close();
-    }
-
-
-
-  
-  
- 
-  
 }
