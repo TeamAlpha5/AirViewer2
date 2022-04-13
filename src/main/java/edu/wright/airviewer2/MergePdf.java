@@ -15,16 +15,13 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
 import com.itextpdf.text.DocumentException;
-//import com.google.java.contract.Invariant;
-//import com.google.java.contract.Requires;
-//import com.google.java.contract.Ensures;
-//@Invariant("numberOfPages != null && numberOfPages.length() > 0")
+
 public class MergePdf {
 	
 	String numberOfPages;
 	String filePath;
 	double parsedNumberOfPages;	
-//@Requires("numberOfPages != null && numberOfPages.length() > 0")
+
 	public MergePdf(String filePath) {
 		this.filePath = filePath;
 	}
