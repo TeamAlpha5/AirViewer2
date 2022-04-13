@@ -62,7 +62,8 @@ public class AIRViewerController implements Initializable {
 
     @FXML
     private MenuItem redoMenuItem;
-
+    @FXML
+    private MenuItem mergePDF;
     @FXML
     private MenuItem addBoxAnnotationMenuItem;
 
@@ -151,7 +152,7 @@ public class AIRViewerController implements Initializable {
         assert addEllipseAnnotationMenuItem != null : "fx:id=\"addEllipseAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addTextAnnotationMenuItem != null : "fx:id=\"addTextAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert deleteAnnotationMenuItem != null : "fx:id=\"deleteAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-
+        assert mergePDF != null : "fx:id=\"mergePDF\" was not injected: check your FXML file 'simple.fxml'.";
         if (null != model) {
             pagination.setPageCount(model.numPages());
             pagination.setDisable(false);
@@ -283,6 +284,17 @@ public class AIRViewerController implements Initializable {
                 model.redo();
                 refreshUserInterface();
             });
+            mergePDF.setOnAction((ActionEvent event) -> {
+                MergePdf a=new MergePdf(model.getStrPath());
+                try {
+					a.mergepdf();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                refreshUserInterface();
+			}
+    );
             addBoxAnnotationMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
