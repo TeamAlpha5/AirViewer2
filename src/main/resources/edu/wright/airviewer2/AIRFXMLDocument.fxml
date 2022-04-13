@@ -36,6 +36,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
+                 <MenuItem fx:id="addPageMenuItem" mnemonicParsing="false" text="Add Page" >
+                  </MenuItem>
                   <MenuItem fx:id="undoMenuItem" mnemonicParsing="false" text="Undo">
                   </MenuItem>
                   <MenuItem fx:id="redoMenuItem" mnemonicParsing="false" text="Redo">
