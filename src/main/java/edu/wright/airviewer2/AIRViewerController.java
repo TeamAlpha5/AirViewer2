@@ -506,6 +506,12 @@ public class AIRViewerController implements Initializable {
 					  AIRViewerModel loadedModel2 = null;
 					  loadedModel2 = new AIRViewerModel(Paths.get(fileName));
 					  reinitializeWithModel(loadedModel2);
+			
+					  File extra1 = new File(fileName+"-addPage.pdf"); 
+		                	  extra1.delete();
+		                
+		               		 File extra2 = new File(fileName+"-1"); 
+		               		 extra2.delete();
 					  
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
