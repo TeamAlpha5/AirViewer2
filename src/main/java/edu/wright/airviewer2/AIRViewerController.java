@@ -148,7 +148,12 @@ public class AIRViewerController implements Initializable {
     
     @FXML
     private MenuItem rotateMenuItem; 
+	
+    @FXML
+    private MenuItem addPageMenuItem;
      
+	
+	
    
     private AIRViewerModel model;
     private ImageView currentPageImageView;
@@ -224,6 +229,7 @@ public class AIRViewerController implements Initializable {
         assert saveAsMenuItem != null : "fx:id=\"saveAsMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+        assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
 
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -309,10 +315,10 @@ public class AIRViewerController implements Initializable {
         assert saveAsMenuItem != null : "fx:id=\"saveAsMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-        
-        
-        
+        assert addPageMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
 
+        
+        
 
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
          assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -425,7 +431,97 @@ public class AIRViewerController implements Initializable {
         rotateMenuItem.setDisable(false);
         
 
+        addPageMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                //int pageIndex = pagination.getCurrentPageIndex();
+                FileInputStream fis = null;
+                FileOutputStream fos = null;
+         
+                // Try block to check for exceptions
+                try {
+         
+                    // Initializing both the streams with
+                    // respective file directory on local machine
+         
+                    // Custom directory path on local machine
+                    fis = new FileInputStream(
+                        fileName);
+         
+                    // Custom directory path on local machine
+                    fos = new FileOutputStream(
+                        fileName+"-1");
+         
+                    anFile=fileName+"-1";
+                    int c;
+                    while ((c = fis.read()) != -1) {
+                    	 
+                        // Writing to output file of the specified
+                        // directory
+                        fos.write(c);
+                    }
+         
+                }catch(Exception e1) {
+                	System.out.println(e1);
+                }
+                File file = new File(fileName+"-addPage.pdf");
+                file.getParentFile().mkdirs();
+                try {
+                	addPagePdf(fileName+"-addPage.pdf");
+					
+					///////copy fileName+"-rotate.pdf" to fileName and airview the fileName/////
+			
+				         
+	                    // Initializing both the streams with
+	                    // respective file directory on local machine
+	         
+	                    // Custom directory path on local machine
+	                    fis = new FileInputStream(
+	                        fileName+"-addPage.pdf");
+	         
+	                    // Custom directory path on local machine
+	                    fos = new FileOutputStream(
+	                        fileName);
+	         
+	                    anFile=fileName;
+	                    int c;
+	                    while ((c = fis.read()) != -1) {
+	                    	 
+	                        // Writing to output file of the specified
+	                        // directory
+	                        fos.write(c);
+	                    }
+	         
+	                
+					///////////////////////////////////////////////
+					
+					
+					  AIRViewerModel loadedModel1 = null;
+					  loadedModel1 = new AIRViewerModel(Paths.get(fileName+"-addPage.pdf"));
+					  reinitializeWithModel(loadedModel1);
+					  
+					  
+					  
+					  //displaying file
+					  AIRViewerModel loadedModel2 = null;
+					  loadedModel2 = new AIRViewerModel(Paths.get(fileName));
+					  reinitializeWithModel(loadedModel2);
+					  
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+               
+               // refreshUserInterface();
+            }
+        });
+        addPageMenuItem.setDisable(false);
         
+	    
+	    
+	    
+	    
+	    
         
         if (null != model) {
             Stage stage = AIRViewer.getPrimaryStage();
