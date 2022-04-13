@@ -135,6 +135,8 @@ public class AIRViewerController implements Initializable {
     @FXML
     private MenuItem mergePDF;
     @FXML
+    private MenuItem splitPDF;
+    @FXML
     private MenuItem addBoxAnnotationMenuItem;
     
     @FXML
@@ -237,6 +239,7 @@ public class AIRViewerController implements Initializable {
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
         assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+
         assert undoMenuItem != null : "fx:id=\"undoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert redoMenuItem != null : "fx:id=\"redoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addBoxAnnotationMenuItem != null : "fx:id=\"addBoxAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -245,6 +248,7 @@ public class AIRViewerController implements Initializable {
         assert addTextAnnotationMenuItem != null : "fx:id=\"addTextAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert deleteAnnotationMenuItem != null : "fx:id=\"deleteAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert mergePDF != null : "fx:id=\"mergePDF\" was not injected: check your FXML file 'simple.fxml'.";
+	assert splitPDF != null : "fx:id=\"splitPDF\" was not injected: check your FXML file 'simple.fxml'.";
         if (null != model) {
             pagination.setPageCount(model.numPages());
             pagination.setDisable(false);
@@ -621,6 +625,18 @@ public class AIRViewerController implements Initializable {
 					e1.printStackTrace();
 				}
                 refreshUserInterface();
+			}
+    );
+		splitPDF.setOnAction((ActionEvent event) -> {
+	                SplitPdf a=new SplitPdf(model.getStrPath());
+	                try {
+						a.splitpdf();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+	                refreshUserInterface();
+					
 			}
     );
             addBoxAnnotationMenuItem.setOnAction(new EventHandler<ActionEvent>() {
