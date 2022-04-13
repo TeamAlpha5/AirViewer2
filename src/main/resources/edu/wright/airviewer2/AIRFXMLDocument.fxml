@@ -34,6 +34,13 @@
                   </MenuItem>
             </items>
           </Menu>
+           <Menu mnemonicParsing="false" text="Functions">
+            <items>
+                  <MenuItem fx:id="mergePDF" mnemonicParsing="false" text="Merge PDF">
+                  </MenuItem>
+                 
+            </items>
+          </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
                   <MenuItem fx:id="undoMenuItem" mnemonicParsing="false" text="Undo">
