@@ -662,9 +662,29 @@ public class AIRViewerController implements Initializable {
     }
 
 
+    protected void addPagePdf(String dest) throws Exception {
+	   		  
+		  File file = new File(anFile);
+	      PDDocument document = PDDocument.load(file);
+	       
+	      //Listing the number of existing pages
+	      int noOfPages= document.getNumberOfPages();
+	      //System.out.print(noOfPages);
+	       
+	      //Removing the pages
+	      PDPage my_page = new PDPage();
+	      
+	      document.addPage(my_page);
+	      
+	      System.out.println("page added");
 
+	      //Saving the document
+	      document.save(dest);
+
+	      //Closing the document
+	      document.close();  
+	}
   
-  
- 
+   
   
 }
