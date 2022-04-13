@@ -18,16 +18,11 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 
 import com.itextpdf.text.DocumentException;
-//import com.google.java.contract.Invariant;
-//import com.google.java.contract.Requires;
-//import com.google.java.contract.Ensures;
-//@Invariant("numberOfPages != null && numberOfPages.length() > 0")
 public class SplitPdf {
 	
 	String numberOfPages;
 	String filePath;
 	double parsedNumberOfPages;	
-//@Requires("numberOfPages != null && numberOfPages.length() > 0")
 	public SplitPdf(String filePath) {
 		this.filePath = filePath;
 	}
@@ -36,7 +31,7 @@ public class SplitPdf {
 	        throws IOException, DocumentException
 	    {
 	    }
-	@SuppressWarnings("deprecation")
+	
 	public void splitpdf() throws Exception, NullPointerException
     {
 		
