@@ -36,6 +36,17 @@
               <MenuItem fx:id="deleteAnnotationMenuItem" mnemonicParsing="false" text="Delete Annotation" />
             </items>
           </Menu>
+           <Menu mnemonicParsing="false" text="Convert">
+            <items>
+                  <MenuItem fx:id="convertIntoJPEG" mnemonicParsing="false" text=" to JPEG">
+                  </MenuItem>
+                  <MenuItem fx:id="convertIntoPNG" mnemonicParsing="false" text="to PNG">
+                  </MenuItem>
+                  <MenuItem fx:id="convertIntoDoc" mnemonicParsing="false" text="Document" />
+                  <MenuItem fx:id="convertIntoText" mnemonicParsing="false" text="Text file" />
+                  <MenuItem fx:id="convertIntoHtml" mnemonicParsing="false" text="HTML file" />
+            </items>
+          </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
