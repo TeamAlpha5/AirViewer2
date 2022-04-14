@@ -26,23 +26,6 @@
               <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
-           <Menu mnemonicParsing="false" text="Convert">
-            <items>
-                  <MenuItem fx:id="convertIntoJPEG" mnemonicParsing="false" text=" to JPEG">
-                  </MenuItem>
-                  <MenuItem fx:id="convertIntoPNG" mnemonicParsing="false" text="to PNG">
-                  </MenuItem>
-            </items>
-          </Menu>
-           <Menu mnemonicParsing="false" text="Functions">
-            <items>
-                  <MenuItem fx:id="mergePDF" mnemonicParsing="false" text="Merge PDF">
-                  </MenuItem>
-               <MenuItem fx:id="splitPDF" mnemonicParsing="false" text="Split PDF">
-                  </MenuItem>
-                 
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
                  <MenuItem fx:id="addPageMenuItem" mnemonicParsing="false" text="Add Page" >
@@ -66,6 +49,15 @@
                   <MenuItem fx:id="convertIntoDoc" mnemonicParsing="false" text="Document" />
                   <MenuItem fx:id="convertIntoText" mnemonicParsing="false" text="Text file" />
                   <MenuItem fx:id="convertIntoHtml" mnemonicParsing="false" text="HTML file" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Functions">
+            <items>
+                  <MenuItem fx:id="mergePDF" mnemonicParsing="false" text="Merge PDF">
+                  </MenuItem>
+               <MenuItem fx:id="splitPDF" mnemonicParsing="false" text="Split PDF">
+                  </MenuItem>
+                 
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
