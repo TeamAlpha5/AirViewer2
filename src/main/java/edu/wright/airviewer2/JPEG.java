@@ -18,17 +18,15 @@ import com.google.java.contract.Ensures;
  */
 @Invariant("filePath!= null && filePath.length() > 0")
 public class JPEG {	
-	String numberOfPages;
 	String filePath;
-	double parsedNumberOfPages;	
 	
-	@Requires("filePath != null && filePath.length() > 0")
 /*
  * This is a constructor where it takes path of the pdf as a parameter
  * @param filePath
  * 
  * 
  */
+	@Requires("filePath != null && filePath.length() > 0")
 	public JPEG(String filePath) {
 		this.filePath = filePath;
 	}
