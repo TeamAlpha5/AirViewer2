@@ -386,12 +386,13 @@ public class AIRViewerController implements Initializable {
                 }catch(Exception e1) {
                 	System.out.println(e1);
                 }
-                File file = new File(fileName+"-rotate.pdf");
+                File file = new File(fileName+"-1rotate.pdf");
                 file.getParentFile().mkdirs();
                 try {
-					rotatePdf(fileName+"-rotate.pdf");
+			    RotateViewerModel r= new RotateViewerModel();
+                   	    r.rotatefn(fileName+"-1");
 					
-					///////copy fileName+"-rotate.pdf" to fileName and airview the fileName/////
+			    //copy fileName+"-rotate.pdf" to fileName and airview the fileName/////
 			
 				         
 	                    // Initializing both the streams with
@@ -399,7 +400,7 @@ public class AIRViewerController implements Initializable {
 	         
 	                    // Custom directory path on local machine
 	                    fis = new FileInputStream(
-	                        fileName+"-rotate.pdf");
+	                        fileName+"-1rotate.pdf");
 	         
 	                    // Custom directory path on local machine
 	                    fos = new FileOutputStream(
@@ -419,7 +420,7 @@ public class AIRViewerController implements Initializable {
 					
 					
 					  AIRViewerModel loadedModel1 = null;
-					  loadedModel1 = new AIRViewerModel(Paths.get(fileName+"-rotate.pdf"));
+					  loadedModel1 = new AIRViewerModel(Paths.get(fileName+"-1rotate.pdf"));
 					  reinitializeWithModel(loadedModel1);
 					  
 					  
@@ -429,7 +430,7 @@ public class AIRViewerController implements Initializable {
 					  loadedModel2 = new AIRViewerModel(Paths.get(fileName));
 					  reinitializeWithModel(loadedModel2);
 			
-					  File extra1 = new File(fileName+"-rotate.pdf"); 
+					  File extra1 = new File(fileName+"-1rotate.pdf"); 
 					  extra1.delete();
 
 					  File extra2 = new File(fileName+"-1"); 
@@ -484,7 +485,7 @@ public class AIRViewerController implements Initializable {
                 try {
                 	addPagePdf(fileName+"-addPage.pdf");
 					
-					///////copy fileName+"-rotate.pdf" to fileName and airview the fileName/////
+			///////copy fileName+"-rotate.pdf" to fileName and airview the fileName/////
 			
 				         
 	                    // Initializing both the streams with
@@ -701,23 +702,7 @@ public class AIRViewerController implements Initializable {
     }
     
     
-       
-    protected void rotatePdf(String dest) throws Exception {
-        PdfDocument pdfDoc = new PdfDocument(new PdfReader(anFile), new PdfWriter(fileName+"-rotate.pdf"));
-
-        for (int p = 1; p <= pdfDoc.getNumberOfPages(); p++) {
-            PdfPage page = pdfDoc.getPage(p);
-            int rotate = page.getRotation();
-            if (rotate == 0) {
-                page.setRotation(90);
-            } else {
-                page.setRotation((rotate + 90) % 360);
-            }
-        }
-
-        pdfDoc.close();
-    }
-
+     
 
     protected void addPagePdf(String dest) throws Exception {
 	   		  
