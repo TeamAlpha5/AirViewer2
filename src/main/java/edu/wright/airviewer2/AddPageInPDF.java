@@ -4,9 +4,15 @@ import java.io.File;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
-
+/*
+ * @author erraramdixit
+ */
 public class AddPageInPDF {
-
+        /*
+	 * The below method adds an extra empty page to the pdf so that user can edit and add what ever he needs
+	 * File created date 04/12/2022 no changes made after this date
+	 * if any changes made to it please update the date and document the reason for the upgrade 
+	 */
 	public AddPageInPDF() {
 		// TODO Auto-generated constructor stub
 	}
