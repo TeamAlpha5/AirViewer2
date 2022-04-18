@@ -107,6 +107,8 @@ public class AIRViewerController implements Initializable {
     @FXML
     private MenuItem convertIntoPNG;
     @FXML
+    private MenuItem addWatermark;
+  @FXML
     private MenuItem convertIntoDoc;
     @FXML
     private MenuItem convertIntoText;
@@ -228,15 +230,15 @@ public class AIRViewerController implements Initializable {
         assert pagination != null : "fx:id=\"pagination\" was not injected: check your FXML file 'simple.fxml'.";
         assert openMenuItem != null : "fx:id=\"openMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert saveAsMenuItem != null : "fx:id=\"saveAsMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+      assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	   assert addWatermark != null : "fx:id=\"addWatermark\" was not injected: check your FXML file 'simple.fxml'.";
+        assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert removePageMenuItem != null : "fx:id=\"removePageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-	
 	assert encryptMenuItem != null : "fx:id=\"encryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-        
-
 	assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoDoc != null : "fx:id=\"convertIntoDoc\" was not injected: check your FXML file 'simple.fxml'.";
@@ -334,6 +336,7 @@ public class AIRViewerController implements Initializable {
                
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
+	    assert addWatermark != null : "fx:id=\"addWatermark\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoDoc != null : "fx:id=\"convertIntoDoc\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoText != null : "fx:id=\"convertIntoText\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoHtml != null : "fx:id=\"convertIntoHtml\" was not injected: check your FXML file 'simple.fxml'.";
@@ -657,19 +660,6 @@ public class AIRViewerController implements Initializable {
             //reinitializeWithModel(promptLoadModel(AIRViewerController.DEFAULT_PATH));
         });
         encryptMenuItem.setDisable(false);
-        
-        
-       /* decryptMenuItem.setOnAction((ActionEvent e) -> {
-            System.out.println("decrypt ...");
-            //reinitializeWithModel(promptLoadModel(AIRViewerController.DEFAULT_PATH));
-        });
-        decryptMenuItem.setDisable(false);*/
-	    
-	    
-	    
-	    
-	    
-        
         if (null != model) {
             Stage stage = AIRViewer.getPrimaryStage();
             assert null != stage;
@@ -731,6 +721,21 @@ public class AIRViewerController implements Initializable {
 				} 
                 
             });
+		addWatermark.setOnAction((ActionEvent event) -> {
+                try {
+                	Watermarkaddition a=new Watermarkaddition(model.getStrPath());
+					a.watermarkAdd();
+              refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });    
+                  
 		  convertIntoHtml.setOnAction((ActionEvent event) -> {
                 try {
 					HtmlConversion a=new HtmlConversion(model.getStrPath());
