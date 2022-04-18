@@ -6,9 +6,16 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
-
+/*
+ * @author erraramdixit
+ */
 public class RemovePageInPDF {
 
+	/*
+	 * The below method removes page from the pdf so that user can edit pdf
+	 * File created date 04/10/2022 no changes made after this date
+	 * if any changes made to it please update the date and document the reason for the upgrade
+	 */
 	public RemovePageInPDF() {
 		// TODO Auto-generated constructor stub
 	}
