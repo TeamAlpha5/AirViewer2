@@ -149,6 +149,12 @@ public class AIRViewerController implements Initializable {
     @FXML
     private MenuItem removePageMenuItem;
 	
+@FXML
+    private MenuItem encryptMenuItem;
+    
+    @FXML
+    private MenuItem decryptMenuItem;
+	
    
     private AIRViewerModel model;
     private ImageView currentPageImageView;
@@ -226,11 +232,17 @@ public class AIRViewerController implements Initializable {
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert removePageMenuItem != null : "fx:id=\"removePageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	
+	assert encryptMenuItem != null : "fx:id=\"encryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+        assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+        
+
 	assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoDoc != null : "fx:id=\"convertIntoDoc\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoText != null : "fx:id=\"convertIntoText\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoHtml != null : "fx:id=\"convertIntoHtml\" was not injected: check your FXML file 'simple.fxml'.";
+
         assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
 	assert undoMenuItem != null : "fx:id=\"undoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert redoMenuItem != null : "fx:id=\"redoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -317,6 +329,9 @@ public class AIRViewerController implements Initializable {
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert removePageMenuItem != null : "fx:id=\"removePageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+        assert encryptMenuItem != null : "fx:id=\"encryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+        assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+               
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoDoc != null : "fx:id=\"convertIntoDoc\" was not injected: check your FXML file 'simple.fxml'.";
@@ -616,6 +631,40 @@ public class AIRViewerController implements Initializable {
             }
         });
         removePageMenuItem.setDisable(false);
+	    
+	    
+	    
+	    
+	    
+	encryptMenuItem.setOnAction((ActionEvent e) -> {
+            System.out.println("encrypt ...");
+           // String path = file.getCanonicalPath();
+            File file = new File(fileName+"-1encryted");
+            file.getParentFile().mkdirs();
+
+            try {
+				//manipulatePdf(fileName+"-1encryted");
+            	EncryptPDF ep=new EncryptPDF();
+            	ep.encryptPdf(fileName);
+            	AIRViewerModel loadedModel1 = null;
+				loadedModel1 = new AIRViewerModel(Paths.get(fileName+"-1encryted"));
+				reinitializeWithModel(loadedModel1);
+				// refreshUserInterface();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+            //reinitializeWithModel(promptLoadModel(AIRViewerController.DEFAULT_PATH));
+        });
+        encryptMenuItem.setDisable(false);
+        
+        
+       /* decryptMenuItem.setOnAction((ActionEvent e) -> {
+            System.out.println("decrypt ...");
+            //reinitializeWithModel(promptLoadModel(AIRViewerController.DEFAULT_PATH));
+        });
+        decryptMenuItem.setDisable(false);*/
+	    
 	    
 	    
 	    
