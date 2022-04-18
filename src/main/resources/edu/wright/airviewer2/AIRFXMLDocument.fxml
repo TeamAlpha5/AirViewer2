@@ -30,6 +30,8 @@
                   </MenuItem>
                   <MenuItem fx:id="redoMenuItem" mnemonicParsing="false" text="Redo">
                   </MenuItem>
+               <MenuItem fx:id="addWatermark" mnemonicParsing="false" text="Add Watermark">
+                  </MenuItem>
                   <MenuItem fx:id="addBoxAnnotationMenuItem" mnemonicParsing="false" text="Add Box Annotation" />
                   <MenuItem fx:id="addEllipseAnnotationMenuItem" mnemonicParsing="false" text="Add Ellipse Annotation" />
                   <MenuItem fx:id="addTextAnnotationMenuItem" mnemonicParsing="false" text="Add Text Annotation" />
