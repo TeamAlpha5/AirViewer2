@@ -38,8 +38,8 @@ this.filePath = filePath;
 * @throws NullPointerException
 */
     
- /* The below method rotates the pdf in all direction this is not landscape or potrait mode this functionality
- * rotates the pdf in required directions irrespective of rotating the monitor 
+ /* The below method rotates the pdf in all direction(90,180,270,360) this is NOT landscape or potrait mode this functionality
+ * rotates the pdf in all the required directions irrespective of rotating the monitor 
  * File created date 04/10/2022 no changes made after this date
  * if any changes made to it please update the date and document the reason for the upgrade
  */
