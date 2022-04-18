@@ -4,15 +4,11 @@
  * and open the template in the editor.
  */
 package edu.wright.airviewer2;
-
 import edu.wright.airviewer2.AIRViewer;
 import java.io.File;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
 import java.io.FileNotFoundException;
-
 import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -26,19 +22,13 @@ import java.util.List;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import org.apache.pdfbox.multipdf.Splitter;
 import org.apache.pdfbox.pdmodel.PDDocument;
-
 import java.util.UUID;
-
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-
 import com.itextpdf.layout.*;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.layout.Document;
@@ -50,15 +40,10 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 import com.itextpdf.layout.properties.VerticalAlignment;
-
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
-
 import com.itextpdf.text.DocumentException;
-
-
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -78,7 +63,6 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.colors.DeviceCmyk;
 import com.itextpdf.kernel.colors.DeviceGray;
@@ -97,12 +81,11 @@ import com.itextpdf.kernel.pdf.PdfStream;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.WriterProperties;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
-
 import java.io.File;
-
 /**
  *
- * @author rahulsatla
+ * @author erik
+ * @author Rahul Satla
  */
 public class AIRViewerController implements Initializable {
 
@@ -121,7 +104,15 @@ public class AIRViewerController implements Initializable {
     private MenuItem closeMenuItem;
     @FXML
     private MenuItem convertIntoJPEG;
- 
+    @FXML
+    private MenuItem convertIntoPNG;
+    @FXML
+    private MenuItem convertIntoDoc;
+    @FXML
+    private MenuItem convertIntoText;
+    @FXML
+    private MenuItem convertIntoHtml;
+
     @FXML
     private MenuItem extractTextMenuItem;
 
@@ -130,7 +121,10 @@ public class AIRViewerController implements Initializable {
 
     @FXML
     private MenuItem redoMenuItem;
-
+    @FXML
+    private MenuItem mergePDF;
+    @FXML
+    private MenuItem splitPDF;
     @FXML
     private MenuItem addBoxAnnotationMenuItem;
     
@@ -242,16 +236,23 @@ public class AIRViewerController implements Initializable {
 	assert encryptMenuItem != null : "fx:id=\"encryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         
-        assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
+
+	assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
+        assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoDoc != null : "fx:id=\"convertIntoDoc\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoText != null : "fx:id=\"convertIntoText\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoHtml != null : "fx:id=\"convertIntoHtml\" was not injected: check your FXML file 'simple.fxml'.";
+
         assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-        assert undoMenuItem != null : "fx:id=\"undoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	assert undoMenuItem != null : "fx:id=\"undoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert redoMenuItem != null : "fx:id=\"redoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addBoxAnnotationMenuItem != null : "fx:id=\"addBoxAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert scrollMenuItem != null : "fx:id=\"scrollMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addEllipseAnnotationMenuItem != null : "fx:id=\"addEllipseAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addTextAnnotationMenuItem != null : "fx:id=\"addTextAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert deleteAnnotationMenuItem != null : "fx:id=\"deleteAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-
+        assert mergePDF != null : "fx:id=\"mergePDF\" was not injected: check your FXML file 'simple.fxml'.";
+	assert splitPDF != null : "fx:id=\"splitPDF\" was not injected: check your FXML file 'simple.fxml'.";
         if (null != model) {
             pagination.setPageCount(model.numPages());
             pagination.setDisable(false);
@@ -327,13 +328,15 @@ public class AIRViewerController implements Initializable {
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-
         assert removePageMenuItem != null : "fx:id=\"removePageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert encryptMenuItem != null : "fx:id=\"encryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-                
-
+               
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
+        assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoDoc != null : "fx:id=\"convertIntoDoc\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoText != null : "fx:id=\"convertIntoText\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoHtml != null : "fx:id=\"convertIntoHtml\" was not injected: check your FXML file 'simple.fxml'.";
         assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert undoMenuItem != null : "fx:id=\"undoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert redoMenuItem != null : "fx:id=\"redoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -342,7 +345,6 @@ public class AIRViewerController implements Initializable {
         assert addEllipseAnnotationMenuItem != null : "fx:id=\"addEllipseAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addTextAnnotationMenuItem != null : "fx:id=\"addTextAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert deleteAnnotationMenuItem != null : "fx:id=\"deleteAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-
         model = aModel;
         openMenuItem.setOnAction((ActionEvent e) -> {
             System.out.println("Open ...");
@@ -354,9 +356,6 @@ public class AIRViewerController implements Initializable {
             Platform.exit();
         });
         closeMenuItem.setDisable(false);
-        
-              
-        
         rotateMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -718,7 +717,66 @@ public class AIRViewerController implements Initializable {
 				} 
                 
             });
-         
+            convertIntoPNG.setOnAction((ActionEvent event) -> {
+                try {
+                	PNG a=new PNG(model.getStrPath());
+					a.png();
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
+		  convertIntoHtml.setOnAction((ActionEvent event) -> {
+                try {
+					HtmlConversion a=new HtmlConversion(model.getStrPath());
+					
+					a.htmlConversion();
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
+                
+           convertIntoDoc.setOnAction((ActionEvent event) -> {
+                try {
+					DocConversion a=new DocConversion(model.getStrPath());
+					
+					a.docConversion();
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
+		  convertIntoText.setOnAction((ActionEvent event) -> {
+                try {
+					TextConversion a=new TextConversion(model.getStrPath());
+					
+					a.textConversion();
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
             extractTextMenuItem.setOnAction((ActionEvent e) -> {
                 System.out.println("extractTextMenuItem ...");
             });
@@ -730,6 +788,29 @@ public class AIRViewerController implements Initializable {
                 model.redo();
                 refreshUserInterface();
             });
+            mergePDF.setOnAction((ActionEvent event) -> {
+                MergePdf a=new MergePdf(model.getStrPath());
+                try {
+					a.mergepdf();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                refreshUserInterface();
+			}
+    );
+		splitPDF.setOnAction((ActionEvent event) -> {
+	                SplitPdf a=new SplitPdf(model.getStrPath());
+	                try {
+						a.splitpdf();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+	                refreshUserInterface();
+					
+			}
+    );
             addBoxAnnotationMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
