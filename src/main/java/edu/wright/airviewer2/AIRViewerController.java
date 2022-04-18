@@ -71,6 +71,9 @@ public class AIRViewerController implements Initializable {
     private MenuItem convertIntoJPEG;
     @FXML
     private MenuItem convertIntoPNG;
+    @FXML
+    private MenuItem addWatermark;
+
 
     @FXML
     private MenuItem extractTextMenuItem;
@@ -160,6 +163,7 @@ public class AIRViewerController implements Initializable {
         assert openMenuItem != null : "fx:id=\"openMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert saveAsMenuItem != null : "fx:id=\"saveAsMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
       assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	   assert addWatermark != null : "fx:id=\"addWatermark\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
         assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -243,6 +247,7 @@ public class AIRViewerController implements Initializable {
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
+	    assert addWatermark != null : "fx:id=\"addWatermark\" was not injected: check your FXML file 'simple.fxml'.";
         assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert undoMenuItem != null : "fx:id=\"undoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert redoMenuItem != null : "fx:id=\"redoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -308,6 +313,20 @@ public class AIRViewerController implements Initializable {
                 try {
                 	PNG a=new PNG(model.getStrPath());
 					a.png();
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
+		addWatermark.setOnAction((ActionEvent event) -> {
+                try {
+                	Watermarkaddition a=new Watermarkaddition(model.getStrPath());
+					a.watermarkAdd();
                     refreshUserInterface();
 				} catch (IOException | DocumentException e1) {
 					// TODO Auto-generated catch block
