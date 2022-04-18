@@ -57,6 +57,12 @@
               <MenuItem fx:id="deleteAnnotationMenuItem" mnemonicParsing="false" text="Delete Annotation" />
             </items>
           </Menu>
+           <Menu mnemonicParsing="false" text="Secure">
+            <items>
+                  <MenuItem fx:id="protectPassword" mnemonicParsing="false" text="Protect Pdf">
+                  </MenuItem>
+                 </items>
+          </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
