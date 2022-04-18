@@ -82,4 +82,7 @@
         </menus>
       </MenuBar>
    </top>
+   <center>
+   <Pagination fx:id="pagination" prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>
