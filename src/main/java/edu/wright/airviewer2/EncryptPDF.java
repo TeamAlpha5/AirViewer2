@@ -5,9 +5,17 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.WriterProperties;
-
+/*
+ * @author erraramdixit
+ *
+ */
 public class EncryptPDF {
 
+	/*
+	 * THe below method encrypts the pdf and keeps them secure with a password
+	 * File created date 04/16/2022 no changes made after this date
+	 * any changes made to it please update the date and document the reason for the upgrade
+	 */
 	public EncryptPDF() {
 		// TODO Auto-generated constructor stub
 	}
