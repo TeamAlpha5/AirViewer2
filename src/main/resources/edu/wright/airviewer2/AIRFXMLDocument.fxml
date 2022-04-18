@@ -61,7 +61,7 @@
                   </MenuItem>
             </items>
           </Menu>
-           
+       
            <Menu mnemonicParsing="false" text="Encrypt/Decrypt">
             <items>
                 <MenuItem fx:id="encryptMenuItem" mnemonicParsing="false" text="Encrypt" >
@@ -70,6 +70,7 @@
                  </MenuItem>
             </items>
           </Menu>
+
            
           <Menu mnemonicParsing="false" text="Help">
             <items>
