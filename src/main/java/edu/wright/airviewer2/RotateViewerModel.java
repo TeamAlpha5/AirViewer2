@@ -13,9 +13,8 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
-/**
- * @author RahulSatla
- *
+/*
+ * @author ErraRamDixit
  */
 public class RotateViewerModel {
 String numberOfPages;
@@ -38,6 +37,12 @@ this.filePath = filePath;
 * @throws Exception
 * @throws NullPointerException
 */
+    
+ /* The below method rotates the pdf in all direction this is not landscape or potrait mode this functionality
+ * rotates the pdf in required directions irrespective of rotating the monitor 
+ * File created date 04/10/2022 no changes made after this date
+ * if any changes made to it please update the date and document the reason for the upgrade
+ */
 public void rotatefn(String filePath) throws Exception, NullPointerException {
 
 PdfDocument pdfDoc = new PdfDocument(new PdfReader(filePath), new PdfWriter(filePath+"-1rotate.pdf"));
