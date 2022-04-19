@@ -4,15 +4,11 @@
  * and open the template in the editor.
  */
 package edu.wright.airviewer2;
-
 import edu.wright.airviewer2.AIRViewer;
 import java.io.File;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
 import java.io.FileNotFoundException;
-
 import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -26,19 +22,13 @@ import java.util.List;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import org.apache.pdfbox.multipdf.Splitter;
 import org.apache.pdfbox.pdmodel.PDDocument;
-
 import java.util.UUID;
-
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-
 import com.itextpdf.layout.*;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.layout.Document;
@@ -50,15 +40,10 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 import com.itextpdf.layout.properties.VerticalAlignment;
-
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
-
 import com.itextpdf.text.DocumentException;
-
-
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -78,7 +63,6 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.colors.DeviceCmyk;
 import com.itextpdf.kernel.colors.DeviceGray;
@@ -97,12 +81,11 @@ import com.itextpdf.kernel.pdf.PdfStream;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.WriterProperties;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
-
 import java.io.File;
-
 /**
  *
  * @author erik
+ * @author Rahul Satla
  */
 public class AIRViewerController implements Initializable {
 
@@ -115,7 +98,7 @@ public class AIRViewerController implements Initializable {
     private MenuItem openMenuItem;
 
     @FXML
-    private MenuItem saveAsMenuItem;
+    private MenuItem saveAsMenuItem, encyptPDFMenuItem;
 
     @FXML
     private MenuItem closeMenuItem;
@@ -123,6 +106,14 @@ public class AIRViewerController implements Initializable {
     private MenuItem convertIntoJPEG;
     @FXML
     private MenuItem convertIntoPNG;
+    @FXML
+    private MenuItem addWatermark;
+    @FXML
+    private MenuItem convertIntoDoc;
+    @FXML
+    private MenuItem convertIntoText;
+    @FXML
+    private MenuItem convertIntoHtml;
 
     @FXML
     private MenuItem extractTextMenuItem;
@@ -158,17 +149,25 @@ public class AIRViewerController implements Initializable {
     private MenuItem addPageMenuItem;
      
     @FXML
+
     private MenuItem protectPassword;
+    @FXML
+    private MenuItem removePageMenuItem;
 	
-   
+    @FXML
+    private MenuItem encryptMenuItem;
+    
+    @FXML
+    private MenuItem decryptMenuItem;	
     private AIRViewerModel model;
     private ImageView currentPageImageView;
-
     private Group pageImageGroup;
-    
     private String fileName=null;
     
-    private String anFile=null;
+	private String anFile=null;
+	
+    float xInPage;
+    float yInPage;
 
     private AIRViewerModel promptLoadModel(String startPath) {
 
@@ -233,15 +232,23 @@ public class AIRViewerController implements Initializable {
         assert pagination != null : "fx:id=\"pagination\" was not injected: check your FXML file 'simple.fxml'.";
         assert openMenuItem != null : "fx:id=\"openMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert saveAsMenuItem != null : "fx:id=\"saveAsMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+      assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	   assert addWatermark != null : "fx:id=\"addWatermark\" was not injected: check your FXML file 'simple.fxml'.";
+        assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-
-        assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
+        assert removePageMenuItem != null : "fx:id=\"removePageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	assert encryptMenuItem != null : "fx:id=\"encryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+        assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
-        assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoDoc != null : "fx:id=\"convertIntoDoc\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoText != null : "fx:id=\"convertIntoText\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoHtml != null : "fx:id=\"convertIntoHtml\" was not injected: check your FXML file 'simple.fxml'.";
 
-        assert undoMenuItem != null : "fx:id=\"undoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+        assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	assert undoMenuItem != null : "fx:id=\"undoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert redoMenuItem != null : "fx:id=\"redoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addBoxAnnotationMenuItem != null : "fx:id=\"addBoxAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert scrollMenuItem != null : "fx:id=\"scrollMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -254,6 +261,7 @@ public class AIRViewerController implements Initializable {
             pagination.setPageCount(model.numPages());
             pagination.setDisable(false);
             saveAsMenuItem.setDisable(false);
+	    encyptPDFMenuItem.setDisable(false);
             extractTextMenuItem.setDisable(false);
             undoMenuItem.setDisable(!model.getCanUndo());
             undoMenuItem.setText("Undo " + model.getSuggestedUndoTitle());
@@ -275,8 +283,8 @@ public class AIRViewerController implements Initializable {
                         System.out.println("Mouse pressed X: " + me.getX()
                                 + " Y: " + Float.toString(flippedY));
 
-                        float xInPage = (float) me.getX();
-                        float yInPage = flippedY;
+                        xInPage = (float) me.getX();
+                        yInPage = flippedY;
 
                         if (null != model) {
                             int pageIndex = pagination.getCurrentPageIndex();
@@ -306,6 +314,7 @@ public class AIRViewerController implements Initializable {
             });
             pagination.setDisable(true);
             saveAsMenuItem.setDisable(true);
+	    encyptPDFMenuItem.setDisable(true);
             extractTextMenuItem.setDisable(true);
             undoMenuItem.setDisable(true);
             redoMenuItem.setDisable(true);
@@ -324,13 +333,16 @@ public class AIRViewerController implements Initializable {
         assert saveAsMenuItem != null : "fx:id=\"saveAsMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-        assert addPageMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-
-        
-        
-
+        assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+        assert removePageMenuItem != null : "fx:id=\"removePageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+        assert encryptMenuItem != null : "fx:id=\"encryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+        assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";       
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
+	    assert addWatermark != null : "fx:id=\"addWatermark\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoDoc != null : "fx:id=\"convertIntoDoc\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoText != null : "fx:id=\"convertIntoText\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoHtml != null : "fx:id=\"convertIntoHtml\" was not injected: check your FXML file 'simple.fxml'.";
         assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert undoMenuItem != null : "fx:id=\"undoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert redoMenuItem != null : "fx:id=\"redoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -340,7 +352,6 @@ public class AIRViewerController implements Initializable {
         assert addTextAnnotationMenuItem != null : "fx:id=\"addTextAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert deleteAnnotationMenuItem != null : "fx:id=\"deleteAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert protectPassword!=null:"fx:id=\"protectPassword\" was not injected: check your FXML file 'simple.fxml'.";
-
         model = aModel;
         openMenuItem.setOnAction((ActionEvent e) -> {
             System.out.println("Open ...");
@@ -352,9 +363,6 @@ public class AIRViewerController implements Initializable {
             Platform.exit();
         });
         closeMenuItem.setDisable(false);
-        
-              
-        
         rotateMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -388,12 +396,13 @@ public class AIRViewerController implements Initializable {
                 }catch(Exception e1) {
                 	System.out.println(e1);
                 }
-                File file = new File(fileName+"-rotate.pdf");
+                File file = new File(fileName+"-1rotate.pdf");
                 file.getParentFile().mkdirs();
                 try {
-					rotatePdf(fileName+"-rotate.pdf");
+			    RotateViewerModel r= new RotateViewerModel();
+                   	    r.rotatefn(fileName+"-1");
 					
-					///////copy fileName+"-rotate.pdf" to fileName and airview the fileName/////
+			    //copy fileName+"-rotate.pdf" to fileName and airview the fileName/////
 			
 				         
 	                    // Initializing both the streams with
@@ -401,7 +410,7 @@ public class AIRViewerController implements Initializable {
 	         
 	                    // Custom directory path on local machine
 	                    fis = new FileInputStream(
-	                        fileName+"-rotate.pdf");
+	                        fileName+"-1rotate.pdf");
 	         
 	                    // Custom directory path on local machine
 	                    fos = new FileOutputStream(
@@ -421,7 +430,7 @@ public class AIRViewerController implements Initializable {
 					
 					
 					  AIRViewerModel loadedModel1 = null;
-					  loadedModel1 = new AIRViewerModel(Paths.get(fileName+"-rotate.pdf"));
+					  loadedModel1 = new AIRViewerModel(Paths.get(fileName+"-1rotate.pdf"));
 					  reinitializeWithModel(loadedModel1);
 					  
 					  
@@ -431,7 +440,7 @@ public class AIRViewerController implements Initializable {
 					  loadedModel2 = new AIRViewerModel(Paths.get(fileName));
 					  reinitializeWithModel(loadedModel2);
 			
-					  File extra1 = new File(fileName+"-rotate.pdf"); 
+					  File extra1 = new File(fileName+"-1rotate.pdf"); 
 					  extra1.delete();
 
 					  File extra2 = new File(fileName+"-1"); 
@@ -486,7 +495,7 @@ public class AIRViewerController implements Initializable {
                 try {
                 	addPagePdf(fileName+"-addPage.pdf");
 					
-					///////copy fileName+"-rotate.pdf" to fileName and airview the fileName/////
+			///////copy fileName+"-rotate.pdf" to fileName and airview the fileName/////
 			
 				         
 	                    // Initializing both the streams with
@@ -539,8 +548,126 @@ public class AIRViewerController implements Initializable {
             }
         });
         addPageMenuItem.setDisable(false);
+
 	
        if (null != model) {
+    
+	    
+	removePageMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                //int pageIndex = pagination.getCurrentPageIndex();
+                FileInputStream fis = null;
+                FileOutputStream fos = null;
+         
+                // Try block to check for exceptions
+                try {
+         
+                    // Initializing both the streams with
+                    // respective file directory on local machine
+         
+                    // Custom directory path on local machine
+                    fis = new FileInputStream(
+                        fileName);
+         
+                    // Custom directory path on local machine
+                    fos = new FileOutputStream(
+                        fileName+"-1");
+         
+                    anFile=fileName+"-1";
+                    int c;
+                    while ((c = fis.read()) != -1) {
+                    	 
+                        // Writing to output file of the specified
+                        // directory
+                        fos.write(c);
+                    }
+         
+                }catch(Exception e1) {
+                	System.out.println(e1);
+                }
+                File file = new File(fileName+"-1removePage.pdf");
+                file.getParentFile().mkdirs();
+                try {
+                	//removePagePdf(fileName+"-1removePage.pdf");
+                	RemovePageInPDF rp=new RemovePageInPDF();
+                	rp.removePagePdf(fileName);
+					
+                	
+                	//copy fileName+"-rotate.pdf" to fileName and airview the fileName/////
+			
+				         
+	                    // Initializing both the streams with
+	                    // respective file directory on local machine
+	         
+	                    // Custom directory path on local machine
+	                    fis = new FileInputStream(
+	                        fileName+"-1removePage.pdf");
+	         
+	                    // Custom directory path on local machine
+	                    fos = new FileOutputStream(
+	                        fileName);
+	         
+	                    anFile=fileName;
+	                    int c;
+	                    while ((c = fis.read()) != -1) {
+	                    	 
+	                        // Writing to output file of the specified
+	                        // directory
+	                        fos.write(c);
+	                    }
+	         
+	                
+					///////////////////////////////////////////////
+					
+					
+					  AIRViewerModel loadedModel1 = null;
+					  loadedModel1 = new AIRViewerModel(Paths.get(fileName+"-1removePage.pdf"));
+					  reinitializeWithModel(loadedModel1);
+					  
+					  
+					  
+					  //displaying file
+					  AIRViewerModel loadedModel2 = null;
+					  loadedModel2 = new AIRViewerModel(Paths.get(fileName));
+					  reinitializeWithModel(loadedModel2);
+					  
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+               
+               // refreshUserInterface();
+            }
+        });
+        removePageMenuItem.setDisable(false);
+	    
+	    
+	    
+	    
+	    
+	encryptMenuItem.setOnAction((ActionEvent e) -> {
+            System.out.println("encrypt ...");
+           // String path = file.getCanonicalPath();
+            File file = new File(fileName+"-1encryted");
+            file.getParentFile().mkdirs();
+
+            try {
+				//manipulatePdf(fileName+"-1encryted");
+            	EncryptPDF ep=new EncryptPDF();
+            	ep.encryptPdf(fileName);
+            	AIRViewerModel loadedModel1 = null;
+				loadedModel1 = new AIRViewerModel(Paths.get(fileName+"-1encryted"));
+				reinitializeWithModel(loadedModel1);
+				// refreshUserInterface();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+            //reinitializeWithModel(promptLoadModel(AIRViewerController.DEFAULT_PATH));
+        });
+        encryptMenuItem.setDisable(false);
+        if (null != model) {
             Stage stage = AIRViewer.getPrimaryStage();
             assert null != stage;
 
@@ -614,6 +741,73 @@ public class AIRViewerController implements Initializable {
 				} 
                 
             });
+		addWatermark.setOnAction((ActionEvent event) -> {
+                try {
+                	Watermarkaddition a=new Watermarkaddition(model.getStrPath());
+					a.watermarkAdd();
+              refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });    
+                  
+		  convertIntoHtml.setOnAction((ActionEvent event) -> {
+                try {
+					HtmlConversion a=new HtmlConversion(model.getStrPath());
+					
+					a.htmlConversion();
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
+                
+           convertIntoDoc.setOnAction((ActionEvent event) -> {
+                try {
+					DocConversion a=new DocConversion(model.getStrPath());
+					
+					a.docConversion();
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
+		  convertIntoText.setOnAction((ActionEvent event) -> {
+                try {
+					TextConversion a=new TextConversion(model.getStrPath());
+					
+					a.textConversion();
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
+	    encyptPDFMenuItem.setOnAction((ActionEvent event) -> {
+            	FileChooser fileChooser = new FileChooser();
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+                fileChooser.getExtensionFilters().add(extFilter);
+                File file = fileChooser.showSaveDialog((Stage) pagination.getScene().getWindow());
+                });
             extractTextMenuItem.setOnAction((ActionEvent e) -> {
                 System.out.println("extractTextMenuItem ...");
             });
@@ -706,51 +900,5 @@ public class AIRViewerController implements Initializable {
         stage.addEventHandler(WindowEvent.WINDOW_SHOWING, (WindowEvent window) -> {
             reinitializeWithModel(promptLoadModel(DEFAULT_PATH));
         });
-
-    }
-    
-    
-       
-    protected void rotatePdf(String dest) throws Exception {
-        PdfDocument pdfDoc = new PdfDocument(new PdfReader(anFile), new PdfWriter(fileName+"-rotate.pdf"));
-
-        for (int p = 1; p <= pdfDoc.getNumberOfPages(); p++) {
-            PdfPage page = pdfDoc.getPage(p);
-            int rotate = page.getRotation();
-            if (rotate == 0) {
-                page.setRotation(90);
-            } else {
-                page.setRotation((rotate + 90) % 360);
-            }
-        }
-
-        pdfDoc.close();
-    }
-
-
-    protected void addPagePdf(String dest) throws Exception {
-	   		  
-		  File file = new File(anFile);
-	      PDDocument document = PDDocument.load(file);
-	       
-	      //Listing the number of existing pages
-	      int noOfPages= document.getNumberOfPages();
-	      //System.out.print(noOfPages);
-	       
-	      //Removing the pages
-	      PDPage my_page = new PDPage();
-	      
-	      document.addPage(my_page);
-	      
-	      System.out.println("page added");
-
-	      //Saving the document
-	      document.save(dest);
-
-	      //Closing the document
-	      document.close();  
-	}
-  
-   
-  
+    } 
 }

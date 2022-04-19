@@ -21,6 +21,11 @@
             <artifactId>javafx-controls</artifactId>
             <version>13</version>
         </dependency>
+              <dependency>
+        <groupId>com.aspose</groupId>
+        <artifactId>aspose-pdf</artifactId>
+        <version>21.7</version>
+    </dependency>
                  <dependency>
     <groupId>org.apache.pdfbox</groupId>
     <artifactId>pdfbox-tools</artifactId>
