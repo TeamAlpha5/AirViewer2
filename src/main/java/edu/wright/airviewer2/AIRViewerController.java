@@ -95,13 +95,10 @@ public class AIRViewerController implements Initializable {
 
     @FXML
     private Pagination pagination;
-
     @FXML
     private MenuItem openMenuItem;
-
     @FXML
     private MenuItem saveAsMenuItem, encyptPDFMenuItem;
-
     @FXML
     private MenuItem closeMenuItem;
     @FXML
@@ -116,13 +113,10 @@ public class AIRViewerController implements Initializable {
     private MenuItem convertIntoText;
     @FXML
     private MenuItem convertIntoHtml;
-
     @FXML
     private MenuItem extractTextMenuItem;
-
     @FXML
     private MenuItem undoMenuItem;
-
     @FXML
     private MenuItem redoMenuItem;
     @FXML
@@ -130,45 +124,35 @@ public class AIRViewerController implements Initializable {
     @FXML
     private MenuItem splitPDF;
     @FXML
-    private MenuItem addBoxAnnotationMenuItem;
-    
+    private MenuItem addBoxAnnotationMenuItem; 
     @FXML
     private MenuItem scrollMenuItem;
-
     @FXML
     private MenuItem addEllipseAnnotationMenuItem;
-
     @FXML
     private MenuItem addTextAnnotationMenuItem;
-
     @FXML
-    private MenuItem deleteAnnotationMenuItem;
-    
+    private MenuItem deleteAnnotationMenuItem;  
     @FXML
-    private MenuItem rotateMenuItem; 
-	
+    private MenuItem rotateMenuItem; 	
     @FXML
-    private MenuItem addPageMenuItem;
-     
+    private MenuItem addPageMenuItem;   
     @FXML
-
     private MenuItem protectPassword;
     @FXML
-    private MenuItem removePageMenuItem;
-	
+    private MenuItem removePageMenuItem;	
     @FXML
-    private MenuItem encryptMenuItem;
-    
+    private MenuItem encryptMenuItem;   
     @FXML
     private MenuItem decryptMenuItem;	
     @FXML
     private ScrollPane scroller;
+	
     private AIRViewerModel model;
     private ImageView currentPageImageView;
     private Group pageImageGroup;
     private String fileName=null;
-    
-	private String anFile=null;
+    private String anFile=null;
 	
     float xInPage;
     float yInPage;
