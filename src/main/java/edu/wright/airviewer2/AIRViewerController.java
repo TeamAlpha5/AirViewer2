@@ -147,7 +147,9 @@ public class AIRViewerController implements Initializable {
     private MenuItem decryptMenuItem;	
     @FXML
     private ScrollPane scroller;
-	
+    @FXML
+    private MenuItem Optimize;
+
     private AIRViewerModel model;
     private ImageView currentPageImageView;
     private Group pageImageGroup;
@@ -245,6 +247,7 @@ public class AIRViewerController implements Initializable {
         assert deleteAnnotationMenuItem != null : "fx:id=\"deleteAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert mergePDF != null : "fx:id=\"mergePDF\" was not injected: check your FXML file 'simple.fxml'.";
 	assert splitPDF != null : "fx:id=\"splitPDF\" was not injected: check your FXML file 'simple.fxml'.";
+	assert Optimize!=null:"fx:id=\"Optimize\" was not injected: check your FXML file 'simple.fxml'.";
         if (null != model) {
             pagination.setPageCount(model.numPages());
             pagination.setDisable(false);
@@ -339,6 +342,7 @@ public class AIRViewerController implements Initializable {
         assert addTextAnnotationMenuItem != null : "fx:id=\"addTextAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert deleteAnnotationMenuItem != null : "fx:id=\"deleteAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert protectPassword!=null:"fx:id=\"protectPassword\" was not injected: check your FXML file 'simple.fxml'.";
+	assert Optimize!=null:"fx:id=\"Optimize\" was not injected: check your FXML file 'simple.fxml'.";
         model = aModel;
         openMenuItem.setOnAction((ActionEvent e) -> {
             System.out.println("Open ...");
@@ -713,6 +717,18 @@ public class AIRViewerController implements Initializable {
                 refreshUserInterface();
 			}
     );
+		Optimize.setOnAction((ActionEvent event) -> {
+				PdfOptimization a=new PdfOptimization(model.getStrPath());
+                try {
+					a.pdfOptimization();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                refreshUserInterface();
+				
+		}
+);
             convertIntoPNG.setOnAction((ActionEvent event) -> {
                 try {
                 	PNG a=new PNG(model.getStrPath());
@@ -788,6 +804,7 @@ public class AIRViewerController implements Initializable {
 				} 
                 
             });
+		
 	    encyptPDFMenuItem.setOnAction((ActionEvent event) -> {
             	FileChooser fileChooser = new FileChooser();
                 FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
