@@ -151,17 +151,18 @@ public class AIRViewerController implements Initializable {
     private MenuItem addPageMenuItem;
      
     @FXML
+
+    private MenuItem protectPassword;
+    @FXML
     private MenuItem removePageMenuItem;
 	
     @FXML
     private MenuItem encryptMenuItem;
     
     @FXML
-    private MenuItem decryptMenuItem;
-	
+    private MenuItem decryptMenuItem;	
     @FXML
     private ScrollPane scroller;
-	
     private AIRViewerModel model;
     private ImageView currentPageImageView;
     private Group pageImageGroup;
@@ -338,8 +339,7 @@ public class AIRViewerController implements Initializable {
         assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert removePageMenuItem != null : "fx:id=\"removePageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert encryptMenuItem != null : "fx:id=\"encryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-        assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-               
+        assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";       
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
 	    assert addWatermark != null : "fx:id=\"addWatermark\" was not injected: check your FXML file 'simple.fxml'.";
@@ -354,6 +354,7 @@ public class AIRViewerController implements Initializable {
         assert addEllipseAnnotationMenuItem != null : "fx:id=\"addEllipseAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addTextAnnotationMenuItem != null : "fx:id=\"addTextAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert deleteAnnotationMenuItem != null : "fx:id=\"deleteAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+        assert protectPassword!=null:"fx:id=\"protectPassword\" was not injected: check your FXML file 'simple.fxml'.";
         model = aModel;
         openMenuItem.setOnAction((ActionEvent e) -> {
             System.out.println("Open ...");
@@ -550,7 +551,10 @@ public class AIRViewerController implements Initializable {
             }
         });
         addPageMenuItem.setDisable(false);
-        
+
+	
+       if (null != model) {
+    
 	    
 	removePageMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -712,6 +716,19 @@ public class AIRViewerController implements Initializable {
 				} 
                 
             });
+	        protectPassword.setOnAction((ActionEvent event) -> {
+                PdfPassword a=new PdfPassword(model.getStrPath());
+              
+              String pwd = JOptionPane.showInputDialog("Enter the password ");  
+                try {
+					a.pdfpass(pwd);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                refreshUserInterface();
+			}
+    );
             convertIntoPNG.setOnAction((ActionEvent event) -> {
                 try {
                 	PNG a=new PNG(model.getStrPath());
