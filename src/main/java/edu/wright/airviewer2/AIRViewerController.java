@@ -98,7 +98,7 @@ public class AIRViewerController implements Initializable {
     private MenuItem openMenuItem;
 
     @FXML
-    private MenuItem saveAsMenuItem;
+    private MenuItem saveAsMenuItem, encyptPDFMenuItem;
 
     @FXML
     private MenuItem closeMenuItem;
@@ -108,7 +108,7 @@ public class AIRViewerController implements Initializable {
     private MenuItem convertIntoPNG;
     @FXML
     private MenuItem addWatermark;
-  @FXML
+    @FXML
     private MenuItem convertIntoDoc;
     @FXML
     private MenuItem convertIntoText;
@@ -151,21 +151,21 @@ public class AIRViewerController implements Initializable {
     @FXML
     private MenuItem removePageMenuItem;
 	
-@FXML
+    @FXML
     private MenuItem encryptMenuItem;
     
     @FXML
     private MenuItem decryptMenuItem;
 	
-   
     private AIRViewerModel model;
     private ImageView currentPageImageView;
-
     private Group pageImageGroup;
-    
     private String fileName=null;
     
-    private String anFile=null;
+	private String anFile=null;
+	
+    float xInPage;
+    float yInPage;
 
     private AIRViewerModel promptLoadModel(String startPath) {
 
@@ -259,6 +259,7 @@ public class AIRViewerController implements Initializable {
             pagination.setPageCount(model.numPages());
             pagination.setDisable(false);
             saveAsMenuItem.setDisable(false);
+	    encyptPDFMenuItem.setDisable(false);
             extractTextMenuItem.setDisable(false);
             undoMenuItem.setDisable(!model.getCanUndo());
             undoMenuItem.setText("Undo " + model.getSuggestedUndoTitle());
@@ -280,8 +281,8 @@ public class AIRViewerController implements Initializable {
                         System.out.println("Mouse pressed X: " + me.getX()
                                 + " Y: " + Float.toString(flippedY));
 
-                        float xInPage = (float) me.getX();
-                        float yInPage = flippedY;
+                        xInPage = (float) me.getX();
+                        yInPage = flippedY;
 
                         if (null != model) {
                             int pageIndex = pagination.getCurrentPageIndex();
@@ -311,6 +312,7 @@ public class AIRViewerController implements Initializable {
             });
             pagination.setDisable(true);
             saveAsMenuItem.setDisable(true);
+	    encyptPDFMenuItem.setDisable(true);
             extractTextMenuItem.setDisable(true);
             undoMenuItem.setDisable(true);
             redoMenuItem.setDisable(true);
@@ -782,6 +784,12 @@ public class AIRViewerController implements Initializable {
 				} 
                 
             });
+	    encyptPDFMenuItem.setOnAction((ActionEvent event) -> {
+            	FileChooser fileChooser = new FileChooser();
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+                fileChooser.getExtensionFilters().add(extFilter);
+                File file = fileChooser.showSaveDialog((Stage) pagination.getScene().getWindow());
+                });
             extractTextMenuItem.setOnAction((ActionEvent e) -> {
                 System.out.println("extractTextMenuItem ...");
             });
@@ -874,8 +882,5 @@ public class AIRViewerController implements Initializable {
         stage.addEventHandler(WindowEvent.WINDOW_SHOWING, (WindowEvent window) -> {
             reinitializeWithModel(promptLoadModel(DEFAULT_PATH));
         });
-
-    }
-      
-  
+    } 
 }
