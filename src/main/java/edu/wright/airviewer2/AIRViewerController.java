@@ -142,6 +142,10 @@ public class AIRViewerController implements Initializable {
     @FXML
     private MenuItem removePageMenuItem;	
     @FXML
+    private HBox zoomOptionsBox,loadOptionsBox;
+    @FXML
+    private Button loadButton,reduceZoomButton,addZoomButton;
+	  @FXML
     private MenuItem encryptMenuItem;   
     @FXML
     private MenuItem decryptMenuItem;	
@@ -159,9 +163,19 @@ public class AIRViewerController implements Initializable {
     private Group pageImageGroup;
     private String fileName=null;
     private String anFile=null;
+
+    // zoom factor value
+    private float zoomFactor = (float) 1.0;
+    
+    // zoom type enum values
+    public enum ZoomType{WIDTH,HEIGHT,CUSTOM};
+    
+    private ZoomType zoomType;
+
 	
     float xInPage;
     float yInPage;
+    
 
     private AIRViewerModel promptLoadModel(String startPath) {
 
@@ -323,6 +337,38 @@ public class AIRViewerController implements Initializable {
         }
     }
 
+ // function that initialize event handler
+    private void initEventHandler() {
+    	
+        EventHandler<ActionEvent> eventEventHandler = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if(actionEvent.getSource()==loadButton){
+                	System.out.println("Click LoadButton!");
+                }
+                else
+                if(model!=null){
+                    if(actionEvent.getSource()==addZoomButton){
+                        setZoomType(ZoomType.CUSTOM);
+                        zoomFactor*=1.05;
+                        updateImage(pagination.getCurrentPageIndex());
+
+                    }
+                    else if(actionEvent.getSource()==reduceZoomButton){
+                        setZoomType(ZoomType.CUSTOM);
+                        zoomFactor*=.95;
+                        updateImage(pagination.getCurrentPageIndex());
+
+                    }
+                }
+            }
+        };
+
+        addZoomButton.setOnAction(eventEventHandler);
+        reduceZoomButton.setOnAction(eventEventHandler);
+
+    }
+    
     private AIRViewerModel reinitializeWithModel(AIRViewerModel aModel) {
         assert pagination != null : "fx:id=\"pagination\" was not injected: check your FXML file 'simple.fxml'.";
         assert openMenuItem != null : "fx:id=\"openMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -943,7 +989,33 @@ public class AIRViewerController implements Initializable {
         AnchorPane.setLeftAnchor(scroller,0.0);
         AnchorPane.setBottomAnchor(scroller,70.0);
     }
-	
+     // function that update zoom factor value and update current imageview with updated zoom factor value
+    private void updateZoomFactor(){
+        if(zoomType==ZoomType.WIDTH){
+            if(model!=null&&model.getImage(pagination.getCurrentPageIndex())!=null){
+                zoomFactor=(float)((borderPane.getHeight()-20)/model.getImage(pagination.getCurrentPageIndex()).getWidth());
+            }
+        }
+        else if(zoomType==ZoomType.HEIGHT){
+            if(model!=null&&model.getImage(pagination.getCurrentPageIndex())!=null)
+                zoomFactor=(float)((borderPane.getHeight()-70)/model.getImage(pagination.getCurrentPageIndex()).getHeight());
+        }
+    }
+    public ZoomType getZoomType() {
+        return zoomType;
+    }
+    public void setZoomType(ZoomType zoomType) {
+        this.zoomType = zoomType;
+        updateZoomFactor();
+    }
+    public Boolean getZoomOptions() {
+        return zoomOptions;
+    }
+    public void setZoomOptions(Boolean zoomOptions) {
+        this.zoomOptions = zoomOptions;
+        updateToolbar();
+    }
+	    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
