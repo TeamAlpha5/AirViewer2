@@ -4,7 +4,7 @@
 
 ## Rahul Satla
 - As an AirViewer2 User, should be able to convert the pdf into various picture formats such as JPEG, PNG so that based on the requirement user can convert the pdf into his desired picture format.
-- As an AirViewer2 User, should be able to convert the pdf into Various formats such as HTML, Text File and Document so that based on the requirement user can convert the pdf into his desired format.
+- As an AirViewer2 User, should be able to convert the pdf into various formats such as HTML, Text File and Document so that based on the requirement user can convert the pdf into his desired format.
 - As an AirViewer2 User, want to add watermark to the pdf so that we can distinguish copied one and original one.
 
 
