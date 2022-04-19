@@ -163,6 +163,8 @@ public class AIRViewerController implements Initializable {
     private MenuItem decryptMenuItem;	
     @FXML
     private ScrollPane scroller;
+    @FXML
+    private MenuItem Optimize;
     private AIRViewerModel model;
     private ImageView currentPageImageView;
     private Group pageImageGroup;
@@ -261,6 +263,7 @@ public class AIRViewerController implements Initializable {
         assert deleteAnnotationMenuItem != null : "fx:id=\"deleteAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert mergePDF != null : "fx:id=\"mergePDF\" was not injected: check your FXML file 'simple.fxml'.";
 	assert splitPDF != null : "fx:id=\"splitPDF\" was not injected: check your FXML file 'simple.fxml'.";
+	assert Optimize!=null:"fx:id=\"Optimize\" was not injected: check your FXML file 'simple.fxml'.";
         if (null != model) {
             pagination.setPageCount(model.numPages());
             pagination.setDisable(false);
@@ -804,6 +807,18 @@ public class AIRViewerController implements Initializable {
 				} 
                 
             });
+		Optimize.setOnAction((ActionEvent event) -> {
+				PdfOptimization a=new PdfOptimization(model.getStrPath());
+                try {
+					a.pdfOptimization();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                refreshUserInterface();
+				
+		}
+);
 	    encyptPDFMenuItem.setOnAction((ActionEvent event) -> {
             	FileChooser fileChooser = new FileChooser();
                 FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
