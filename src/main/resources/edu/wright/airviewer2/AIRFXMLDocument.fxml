@@ -70,9 +70,7 @@
                   <MenuItem fx:id="mergePDF" mnemonicParsing="false" text="Merge PDF">
                   </MenuItem>
                <MenuItem fx:id="splitPDF" mnemonicParsing="false" text="Split PDF">
-                  </MenuItem>
-               <MenuItem fx:id="Optimize" mnemonicParsing="false" text="Optimize">
-                  </MenuItem>
+		    </MenuItem>
             </items>
           </Menu>
          <Menu mnemonicParsing="false" text="Encrypt/Decrypt">
