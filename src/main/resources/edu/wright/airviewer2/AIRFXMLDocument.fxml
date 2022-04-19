@@ -7,8 +7,19 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wright.airviewer2.AIRViewerController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650" prefWidth="700.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wright.airviewer2.AIRViewerController">
    <center>
       <Pagination fx:id="pagination" prefHeight="46.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </center>
@@ -22,8 +33,7 @@
                   </MenuItem>
                   <MenuItem fx:id="extractTextMenuItem" mnemonicParsing="false" text="Extract Text ..." />
                   <MenuItem fx:id="rotateMenuItem" mnemonicParsing="false" text="Rotate" />
-
-              <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -63,13 +73,16 @@
                   </MenuItem>
             </items>
           </Menu>
-           <Menu mnemonicParsing="false" text="Encrypt/Decrypt">
+         <Menu mnemonicParsing="false" text="Encrypt/Decrypt">
+
             <items>
                 <MenuItem fx:id="encryptMenuItem" mnemonicParsing="false" text="Encrypt" >
                  </MenuItem>
                 <MenuItem fx:id="decryptMenuItem" mnemonicParsing="false" text="Decrypt" >
                  </MenuItem>
             </items>
+
+          
           </Menu>
            <Menu mnemonicParsing="false" text="Secure">
             <items>
@@ -77,6 +90,7 @@
                   </MenuItem>
                  </items>
           </Menu>
+
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
@@ -86,6 +100,28 @@
       </MenuBar>
    </top>
    <center>
-   <Pagination fx:id="pagination" prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+      <VBox alignment="CENTER" prefHeight="538.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane prefHeight="800.0" prefWidth="600.0">
+               <center>
+                  <Pagination fx:id="pagination" prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+               </center>
+               <top>
+                  <ToolBar fx:id="toolBar" prefHeight="28.0" prefWidth="600.0" style="-fx-border-radius: 5;" BorderPane.alignment="CENTER">
+                     <HBox prefHeight="0.0" prefWidth="342.0" style="-fx-spacing: 5;">
+                        <children>
+                          <Label prefHeight="26.0" prefWidth="84.0" text="Zoom Options:" />
+			  <Button fx:id="reduceZoomButton" prefHeight="25.0" prefWidth="35.0" text="-" />
+			  <Button fx:id="addZoomButton" prefHeight="25.0" prefWidth="36.0" text="+" />							  
+                        </children>
+                     </HBox>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </ToolBar>
+               </top>
+            </BorderPane>
+         </children>
+      </VBox>
    </center>
 </BorderPane>
