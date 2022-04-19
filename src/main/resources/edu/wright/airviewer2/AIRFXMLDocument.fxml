@@ -33,8 +33,7 @@
                   </MenuItem>
                   <MenuItem fx:id="extractTextMenuItem" mnemonicParsing="false" text="Extract Text ..." />
                   <MenuItem fx:id="rotateMenuItem" mnemonicParsing="false" text="Rotate" />
-
-              <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -74,17 +73,14 @@
                   </MenuItem>
             </items>
           </Menu>
-       
-           <Menu mnemonicParsing="false" text="Encrypt/Decrypt">
+         <Menu mnemonicParsing="false" text="Encrypt/Decrypt">
             <items>
                 <MenuItem fx:id="encryptMenuItem" mnemonicParsing="false" text="Encrypt" >
                  </MenuItem>
                 <MenuItem fx:id="decryptMenuItem" mnemonicParsing="false" text="Decrypt" >
                  </MenuItem>
             </items>
-          </Menu>
-
-           
+          </Menu> 
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
@@ -105,8 +101,8 @@
                      <HBox prefHeight="0.0" prefWidth="342.0" style="-fx-spacing: 5;">
                         <children>
                           <Label prefHeight="26.0" prefWidth="84.0" text="Zoom Options:" />
-						  <Button fx:id="reduceZoomButton" prefHeight="25.0" prefWidth="35.0" text="-" />
-						  <Button fx:id="addZoomButton" prefHeight="25.0" prefWidth="36.0" text="+" />							  
+			  <Button fx:id="reduceZoomButton" prefHeight="25.0" prefWidth="35.0" text="-" />
+			  <Button fx:id="addZoomButton" prefHeight="25.0" prefWidth="36.0" text="+" />							  
                         </children>
                      </HBox>
                      <opaqueInsets>
