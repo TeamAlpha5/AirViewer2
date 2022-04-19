@@ -52,10 +52,13 @@ public class AnnotationDialog extends Dialog<Object> {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("Annotation.fxml"));
             loader.setController(this);
+
             DialogPane dialogPane = loader.load();
+
             initOwner(owner);
             initModality(Modality.APPLICATION_MODAL);
-     	    setResizable(true);
+
+            setResizable(true);
             setTitle(title);
             setValueTextField(x, y);
             setDialogPane(dialogPane);
@@ -79,4 +82,5 @@ public class AnnotationDialog extends Dialog<Object> {
     private void initialize() {
 
     }
+
 }
