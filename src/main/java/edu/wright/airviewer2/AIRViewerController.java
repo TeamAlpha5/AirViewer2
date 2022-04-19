@@ -124,7 +124,7 @@ public class AIRViewerController implements Initializable {
     @FXML
     private MenuItem splitPDF;
     @FXML
-    private MenuItem addBoxAnnotationMenuItem;   
+    private MenuItem addBoxAnnotationMenuItem; 
     @FXML
     private MenuItem scrollMenuItem;
     @FXML
@@ -132,31 +132,32 @@ public class AIRViewerController implements Initializable {
     @FXML
     private MenuItem addTextAnnotationMenuItem;
     @FXML
-    private MenuItem deleteAnnotationMenuItem;
+    private MenuItem deleteAnnotationMenuItem;  
     @FXML
-    private MenuItem rotateMenuItem; 
+    private MenuItem rotateMenuItem; 	
     @FXML
-    private MenuItem addPageMenuItem;
+    private MenuItem addPageMenuItem;   
     @FXML
     private MenuItem protectPassword;
     @FXML
     private MenuItem removePageMenuItem;	
     @FXML
-    private MenuItem encryptMenuItem;
-    @FXML
-    private MenuItem decryptMenuItem;	
-    @FXML
-    private ScrollPane scroller;	
-    @FXML
     private HBox zoomOptionsBox,loadOptionsBox;
     @FXML
     private Button loadButton,reduceZoomButton,addZoomButton;
+	  @FXML
+    private MenuItem encryptMenuItem;   
+    @FXML
+    private MenuItem decryptMenuItem;	
+    @FXML
+    private ScrollPane scroller;
 	
-    private AIRViewerModel model;	
+    private AIRViewerModel model;
     private ImageView currentPageImageView;
     private Group pageImageGroup;
     private String fileName=null;
     private String anFile=null;
+
     // zoom factor value
     private float zoomFactor = (float) 1.0;
     
@@ -164,6 +165,7 @@ public class AIRViewerController implements Initializable {
     public enum ZoomType{WIDTH,HEIGHT,CUSTOM};
     
     private ZoomType zoomType;
+
 	
     float xInPage;
     float yInPage;
