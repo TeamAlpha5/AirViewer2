@@ -96,7 +96,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="538.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <BorderPane prefHeight="625.0" prefWidth="600.0">
+            <BorderPane prefHeight="800.0" prefWidth="600.0">
                <center>
                   <Pagination fx:id="pagination" prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
                </center>
