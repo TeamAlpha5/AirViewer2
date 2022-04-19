@@ -1,5 +1,7 @@
 package edu.wright.airviewer2;
-
+import com.itextpdf.text.DocumentException;
+import com.google.java.contract.Invariant;
+import com.google.java.contract.Requires;
 import java.io.File;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -7,6 +9,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 /*
  * @author erraramdixit
  */
+@Invariant("filePath!= null && filePath.length() > 0")
 public class AddPageInPDF {
         /*
 	 * The below method adds an extra empty page to the pdf so that user can edit and add what ever he needs
@@ -17,7 +20,9 @@ public class AddPageInPDF {
 		// TODO Auto-generated constructor stub
 	}
 	
-	protected void addPagePdf(String filePath) throws Exception {
+	@Requires("filePath != null && filePath.length() > 0")
+	@Ensures("result == true")
+	protected boolean addPagePdf(String filePath) throws Exception {
  		  
 		  File file = new File(filePath);
 	      PDDocument document = PDDocument.load(file);
@@ -41,7 +46,8 @@ public class AddPageInPDF {
 	      document.save(filePath+"-1addPage.pdf");
 
 	      //Closing the document
-	      document.close();  
+	      document.close(); 
+		return true;
 	}
 
 }
