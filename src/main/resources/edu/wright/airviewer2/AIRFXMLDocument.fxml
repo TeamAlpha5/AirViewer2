@@ -74,13 +74,23 @@
             </items>
           </Menu>
          <Menu mnemonicParsing="false" text="Encrypt/Decrypt">
+
             <items>
                 <MenuItem fx:id="encryptMenuItem" mnemonicParsing="false" text="Encrypt" >
                  </MenuItem>
                 <MenuItem fx:id="decryptMenuItem" mnemonicParsing="false" text="Decrypt" >
                  </MenuItem>
             </items>
-          </Menu> 
+
+          
+          </Menu>
+           <Menu mnemonicParsing="false" text="Secure">
+            <items>
+                  <MenuItem fx:id="protectPassword" mnemonicParsing="false" text="Protect Pdf">
+                  </MenuItem>
+                 </items>
+          </Menu>
+
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
