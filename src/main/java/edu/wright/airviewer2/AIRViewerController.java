@@ -149,6 +149,10 @@ public class AIRViewerController implements Initializable {
     private ScrollPane scroller;
     @FXML
     private MenuItem Optimize;
+    @FXML
+    private MenuItem Header;
+    @FXML
+    private MenuItem Footer;
 
     private AIRViewerModel model;
     private ImageView currentPageImageView;
@@ -248,6 +252,8 @@ public class AIRViewerController implements Initializable {
         assert mergePDF != null : "fx:id=\"mergePDF\" was not injected: check your FXML file 'simple.fxml'.";
 	assert splitPDF != null : "fx:id=\"splitPDF\" was not injected: check your FXML file 'simple.fxml'.";
 	assert Optimize!=null:"fx:id=\"Optimize\" was not injected: check your FXML file 'simple.fxml'.";
+	assert Header!=null:"fx:id=\"Optimize\" was not injected: check your FXML file 'simple.fxml'.";
+	assert Footer!=null:"fx:id=\"Optimize\" was not injected: check your FXML file 'simple.fxml'.";
         if (null != model) {
             pagination.setPageCount(model.numPages());
             pagination.setDisable(false);
@@ -689,6 +695,40 @@ public class AIRViewerController implements Initializable {
                 if (null != file) {
                     model.save(file);
                 }
+            });
+		Header.setOnAction((ActionEvent event) -> {
+                try {
+                	HeaderAddition a=new HeaderAddition(model.getStrPath());
+				
+					 String header = JOptionPane.showInputDialog("Enter the Header");
+					a.headerAddition(header);
+					
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
+            Footer.setOnAction((ActionEvent event) -> {
+                try {
+                	FooterAddition a=new FooterAddition(model.getStrPath());
+				
+					 String footer = JOptionPane.showInputDialog("Enter the Header");
+					a.footerAddition(footer);
+					
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
             });
             convertIntoJPEG.setOnAction((ActionEvent event) -> {
                 try {

@@ -73,6 +73,10 @@
 		    </MenuItem>
 		    <MenuItem fx:id="Optimize" mnemonicParsing="false" text="Optimize">
 		    </MenuItem>
+		    <MenuItem fx:id="Header" mnemonicParsing="false" text="Header">
+                  </MenuItem>
+                 <MenuItem fx:id="Footer" mnemonicParsing="false" text="Footer">
+                  </MenuItem>
             </items>
           </Menu>
          <Menu mnemonicParsing="false" text="Encrypt/Decrypt">
