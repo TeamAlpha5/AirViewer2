@@ -54,6 +54,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Pagination;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -63,6 +64,7 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.scene.layout.AnchorPane;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.colors.DeviceCmyk;
 import com.itextpdf.kernel.colors.DeviceGray;
@@ -159,6 +161,8 @@ public class AIRViewerController implements Initializable {
     
     @FXML
     private MenuItem decryptMenuItem;	
+    @FXML
+    private ScrollPane scroller;
     private AIRViewerModel model;
     private ImageView currentPageImageView;
     private Group pageImageGroup;
@@ -268,7 +272,6 @@ public class AIRViewerController implements Initializable {
             redoMenuItem.setDisable(!model.getCanRedo());
             redoMenuItem.setText("Redo " + model.getSuggestedRedoTitle());
             addBoxAnnotationMenuItem.setDisable(false);
-            scrollMenuItem.setDisable(false);
             addEllipseAnnotationMenuItem.setDisable(false);
             addTextAnnotationMenuItem.setDisable(false);
             deleteAnnotationMenuItem.setDisable(0 >= model.getSelectionSize());
@@ -670,9 +673,8 @@ public class AIRViewerController implements Initializable {
         if (null != model) {
             Stage stage = AIRViewer.getPrimaryStage();
             assert null != stage;
-
             model.deselectAll();
-
+            initScroller();
             pagination.setPageCount(model.numPages());
             pagination.setPageFactory(index -> {
                 if (null == pageImageGroup) {
@@ -890,7 +892,17 @@ public class AIRViewerController implements Initializable {
 
         return model;
     }
-
+	
+    // function that initialize scroller
+    private void initScroller() {
+        
+        scroller = new ScrollPane();
+        AnchorPane.setTopAnchor(scroller,0.0);
+        AnchorPane.setRightAnchor(scroller,0.0);
+        AnchorPane.setLeftAnchor(scroller,0.0);
+        AnchorPane.setBottomAnchor(scroller,70.0);
+    }
+	
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
