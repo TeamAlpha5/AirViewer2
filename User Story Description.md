@@ -26,3 +26,7 @@
 - As an AirViewer2 user, should be able to add image to the pdf so that user can be able to add image to the selected page based on their requirement.
 - As an AirViewer2 user, should be able to implement functionality on page navigation so that user can navigate from one page to another page easily.
 - As an AirViewer2 User, want to add scrollbar functionality to the pdf so that it will be easy for user to traverse through different pages in the pdf.
+
+## Deepika gadiraju
+- As an AirViewer2 user, should be able to add annotations to the pdf application. So, that the user will be able to specify the size of the boxes by entering required text in to it.
+- As an AirViewer2 user, should be able to add Zoom In Zoom Out functionalities to the PDF. So, that user will be able to zoom In and Zoom out the text in pdf when it is needed. 
