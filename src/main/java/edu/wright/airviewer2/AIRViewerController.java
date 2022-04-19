@@ -789,18 +789,7 @@ public class AIRViewerController implements Initializable {
 				} 
                 
             });
-		Optimize.setOnAction((ActionEvent event) -> {
-				PdfOptimization a=new PdfOptimization(model.getStrPath());
-                try {
-					a.pdfOptimization();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-                refreshUserInterface();
-				
-		}
-);
+		
 	    encyptPDFMenuItem.setOnAction((ActionEvent event) -> {
             	FileChooser fileChooser = new FileChooser();
                 FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
