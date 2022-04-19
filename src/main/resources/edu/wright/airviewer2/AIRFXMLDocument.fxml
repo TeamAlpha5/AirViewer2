@@ -71,6 +71,8 @@
                   </MenuItem>
                <MenuItem fx:id="splitPDF" mnemonicParsing="false" text="Split PDF">
 		    </MenuItem>
+		    <MenuItem fx:id="Optimize" mnemonicParsing="false" text="Optimize">
+		    </MenuItem>
             </items>
           </Menu>
          <Menu mnemonicParsing="false" text="Encrypt/Decrypt">
