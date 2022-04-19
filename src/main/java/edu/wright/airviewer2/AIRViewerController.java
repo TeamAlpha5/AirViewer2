@@ -46,23 +46,37 @@ import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import com.itextpdf.text.DocumentException;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.scene.layout.AnchorPane;
 import com.itextpdf.kernel.colors.ColorConstants;
@@ -85,20 +99,20 @@ import com.itextpdf.kernel.pdf.WriterProperties;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import java.io.File;
 /**
- *
+ * class for AIRViewer Controller
  * @author erik
  * @author Rahul Satla
  */
 public class AIRViewerController implements Initializable {
-
-    static final String DEFAULT_PATH = "sample.pdf";
-
+	// default pdf path
+ static final String DEFAULT_PATH = "sample.pdf";
+    // pagination of fxml
     @FXML
     private Pagination pagination;
-
+   // open menuitem
     @FXML
     private MenuItem openMenuItem;
-
+   // open menuitem
     @FXML
     private MenuItem saveAsMenuItem, encyptPDFMenuItem;
 
@@ -125,6 +139,10 @@ public class AIRViewerController implements Initializable {
 
     @FXML
     private MenuItem redoMenuItem;
+    @FXML
+    private ToolBar toolBar;
+    @FXML
+    private Button addImageButton;
     @FXML
     private MenuItem mergePDF;
     @FXML
@@ -155,6 +173,8 @@ public class AIRViewerController implements Initializable {
 	
     @FXML
     private MenuItem encryptMenuItem;
+    @FXML
+    private BorderPane borderPane;
     
     @FXML
     private MenuItem decryptMenuItem;
@@ -163,14 +183,25 @@ public class AIRViewerController implements Initializable {
     private ScrollPane scroller;
 	
     private AIRViewerModel model;
+    // imageview for showing current pdf page
     private ImageView currentPageImageView;
     private Group pageImageGroup;
     private String fileName=null;
     
 	private String anFile=null;
+	// stackpane for pdf viewer
+    SimpleObjectProperty<StackPane> currentImage;
+    
+    
+    // current mouse point clicked.(x, y points)
 	
     float xInPage;
     float yInPage;
+	   
+    String annotationRet = "";
+    
+    
+    // function that load pdf model with pdf file absoulute path
 
     private AIRViewerModel promptLoadModel(String startPath) {
 
@@ -197,11 +228,11 @@ public class AIRViewerController implements Initializable {
 
         return loadedModel;
     }
-
+ // function that synchronize the selection knobs
     private void synchronizeSelectionKnobs() {
         if (null != model && null != currentPageImageView && null != pageImageGroup) {
             List<java.awt.Rectangle> selectedAreas = model.getSelectedAreas();
-            ArrayList<Node> victims = new ArrayList<>(pageImageGroup.getChildren());
+            ArrayList<Node> victims = new ArrayList<Node>(pageImageGroup.getChildren());
             
             // Delete everything in teh group that isn't currentPageImageView
             victims.stream().filter((n) -> (n != currentPageImageView)).forEach((n) -> {
@@ -230,7 +261,11 @@ public class AIRViewerController implements Initializable {
         }
 
     }
-
+ // function that update toolbar
+    private void updateToolbar() {
+    }
+    
+    // function that refresh user interface 
     private void refreshUserInterface() {
         assert pagination != null : "fx:id=\"pagination\" was not injected: check your FXML file 'simple.fxml'.";
         assert openMenuItem != null : "fx:id=\"openMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -278,6 +313,7 @@ public class AIRViewerController implements Initializable {
             if (null != currentPageImageView) {
                 int pageIndex = pagination.getCurrentPageIndex();
                 currentPageImageView.setImage(model.getImage(pageIndex));
+		    // catch the x,y coordination of mouse clicked now
                 currentPageImageView.setOnMousePressed(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent me) {
@@ -328,6 +364,60 @@ public class AIRViewerController implements Initializable {
 
         }
     }
+	    // function that update image of current imageview as the selected page of pdf ifle.
+    private void updateImage(int index) {
+    	
+        if(scroller!=null)
+        	// scroller initialize
+            scroller.setVvalue(0);
+        StackPane stackPane = new StackPane();
+//        stackPane.setMinWidth(borderPane.getWidth()-20);
+        
+        currentPageImageView = new ImageView();
+        if(model!=null){
+            Image image = model.getImage(index);
+            if(image!=null)
+            	currentPageImageView.setImage(image);
+        }
+        
+        // add the current imageview to stackpane
+        stackPane.getChildren().add(currentPageImageView);
+        // set stackpane to currentImage ("SimpleObjectProperty<StackPane>")
+        currentImage.set(stackPane);
+    }
+    
+    // function that initialize scroller
+    private void initScroller() {
+        currentImage = new SimpleObjectProperty<StackPane>();
+        updateImage(0);
+	       scroller = new ScrollPane();
+        AnchorPane.setTopAnchor(scroller,0.0);
+        AnchorPane.setRightAnchor(scroller,0.0);
+        AnchorPane.setLeftAnchor(scroller,0.0);
+        AnchorPane.setBottomAnchor(scroller,70.0);
+        scroller.contentProperty().bind(currentImage);
+    }
+    
+    // function that show image annotaion dialog with title and x, y coordination
+    private void showImageAnnotationDialog(String title, String x, String y) {
+    	ImageAnnotationDialog dialog = new ImageAnnotationDialog(stage, title, x, y);
+    	dialog.showAndWait().ifPresent(result -> {
+    		String ret = result.toString();
+    		annotationRet = ret;
+    	    System.out.println("Annnotaion!"+result.toString());
+    	});
+    }
+    
+    // function that create pdf image with index of pages
+    private Node createPdfImage(int index) {
+    	System.out.println(index);
+        updateImage(index);
+        model.deselectAll();
+        refreshUserInterface();
+        return scroller;
+    }
+    
+    // function that reinitialize with model
 
     private AIRViewerModel reinitializeWithModel(AIRViewerModel aModel) {
         assert pagination != null : "fx:id=\"pagination\" was not injected: check your FXML file 'simple.fxml'.";
@@ -672,6 +762,8 @@ public class AIRViewerController implements Initializable {
             model.deselectAll();
             initScroller();
             pagination.setPageCount(model.numPages());
+		pagination.setCurrentPageIndex(0);
+            pagination.setPageFactory(index -> createPdfImage(index));
             pagination.setPageFactory(index -> {
                 if (null == pageImageGroup) {
                     pageImageGroup = new Group();
