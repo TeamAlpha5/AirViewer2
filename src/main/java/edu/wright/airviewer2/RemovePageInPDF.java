@@ -1,5 +1,7 @@
 package edu.wright.airviewer2;
-
+import com.itextpdf.text.DocumentException;
+import com.google.java.contract.Invariant;
+import com.google.java.contract.Requires;
 import java.io.File;
 
 import javax.swing.JFrame;
@@ -9,6 +11,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 /*
  * @author erraramdixit
  */
+@Invariant("fileName!= null && fileName.length() > 0")
 public class RemovePageInPDF {
 
 	/*
@@ -20,8 +23,9 @@ public class RemovePageInPDF {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	 protected void removePagePdf(String fileName) throws Exception {
+	@Requires("filePath != null && filePath.length() > 0")
+	@Ensures("result == true")
+	 protected boolean removePagePdf(String fileName) throws Exception {
 	   	  
 		  File file = new File(fileName);
 	      PDDocument document = PDDocument.load(file);
@@ -46,7 +50,8 @@ public class RemovePageInPDF {
 	      document.save(fileName+"-1removePage.pdf");
 
 	      //Closing the document
-	      document.close();  
+	      document.close();
+		 return true;
 	}
 	 
 }
