@@ -205,8 +205,8 @@ public class AIRViewerController implements Initializable {
     public enum ZoomType{WIDTH,HEIGHT,CUSTOM};
     
     private ZoomType zoomType;
-
-	
+    String annotationRet = "";
+    Stage stage;
     float xInPage;
     float yInPage;
     
@@ -376,6 +376,19 @@ public class AIRViewerController implements Initializable {
 
         }
     }
+
+	
+     // function that show annotation dialog with title and x, y
+    private void ShowAnnotationDialog(String title, String x, String y) {
+    	
+    	AnnotationDialog dialog = new AnnotationDialog(stage, title, x, y);
+    	dialog.showAndWait().ifPresent(result -> {
+        String ret = result.toString();
+    	annotationRet = ret;
+    	System.out.println("Annnotaion!"+result.toString());
+    	});
+    }
+	
 	    // function that update image of current imageview as the selected page of pdf ifle.
     private void updateImage(int index) {
     	
@@ -430,7 +443,6 @@ public class AIRViewerController implements Initializable {
     }
     
     // function that reinitialize with model
-
  // function that initialize event handler
     private void initEventHandler() {
     	
@@ -1030,9 +1042,12 @@ public class AIRViewerController implements Initializable {
             addBoxAnnotationMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
+		    ShowAnnotationDialog("AddBoxAnnotation", String.valueOf(xInPage), String.valueOf(yInPage));
+                    String vals[] = annotationRet.split(",");
+                    System.out.println(vals[0]+","+vals[1]+","+vals[2]+","+vals[3]+","+vals[4]);
                     int pageIndex = pagination.getCurrentPageIndex();
                     model.executeDocumentCommandWithNameAndArgs("AddBoxAnnotation",
-                            new String[]{Integer.toString(pageIndex), "36.0", "36.0", "72.0", "72.0"});
+                            new String[]{Integer.toString(pageIndex), vals[0], vals[1], vals[2], vals[3]});
                     refreshUserInterface();
                 }
             });
