@@ -1059,18 +1059,24 @@ public class AIRViewerController implements Initializable {
             addEllipseAnnotationMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
+		    ShowAnnotationDialog("AddEclipseAnnotation", String.valueOf(xInPage), String.valueOf(yInPage));
+                    String vals[] = annotationRet.split(",");
+                    System.out.println(vals[0]+","+vals[1]+","+vals[2]+","+vals[3]+","+vals[4]);
                     int pageIndex = pagination.getCurrentPageIndex();             
                     model.executeDocumentCommandWithNameAndArgs("AddCircleAnnotation",
-                            new String[]{Integer.toString(pageIndex), "288", "576", "144.0", "72.0", "Sample Text!"});
+                            new String[]{Integer.toString(pageIndex), vals[0], vals[1], vals[2], vals[3],vals[4]});
                     refreshUserInterface();
                 }
             });
             addTextAnnotationMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
+		    ShowAnnotationDialog("AddTextAnnotation", String.valueOf(xInPage), String.valueOf(yInPage));
+                    String vals[] = annotationRet.split(",");
+	            System.out.println(vals[0]+","+vals[1]+","+vals[2]+","+vals[3]+","+vals[4]);
                     int pageIndex = pagination.getCurrentPageIndex();
                     model.executeDocumentCommandWithNameAndArgs("AddTextAnnotation",
-                            new String[]{Integer.toString(pageIndex), "36", "576", "144.0", "19.0", "A Bit More Sample Text!"});
+                            new String[]{Integer.toString(pageIndex), vals[0], vals[1], vals[2], vals[3],vals[4]});
                     
                     refreshUserInterface();
                 }
