@@ -129,6 +129,8 @@ public class AIRViewerController implements Initializable {
     private MenuItem convertIntoText;
     @FXML
     private MenuItem convertIntoHtml;
+	@FXML
+    private MenuItem addStamp;
     @FXML
     private MenuItem extractTextMenuItem;
     @FXML
@@ -282,6 +284,7 @@ public class AIRViewerController implements Initializable {
       assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
 	   assert addWatermark != null : "fx:id=\"addWatermark\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
+	    assert addStamp != null : "fx:id=\"addStamp\" was not injected: check your FXML file 'simple.fxml'.";
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -293,7 +296,6 @@ public class AIRViewerController implements Initializable {
 	assert convertIntoDoc != null : "fx:id=\"convertIntoDoc\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoText != null : "fx:id=\"convertIntoText\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoHtml != null : "fx:id=\"convertIntoHtml\" was not injected: check your FXML file 'simple.fxml'.";
-
         assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
 	assert undoMenuItem != null : "fx:id=\"undoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert redoMenuItem != null : "fx:id=\"redoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -487,7 +489,7 @@ public class AIRViewerController implements Initializable {
         assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";       
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
-	    assert addWatermark != null : "fx:id=\"addWatermark\" was not injected: check your FXML file 'simple.fxml'.";
+	assert addStamp != null : "fx:id=\"addStamp\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoDoc != null : "fx:id=\"convertIntoDoc\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoText != null : "fx:id=\"convertIntoText\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoHtml != null : "fx:id=\"convertIntoHtml\" was not injected: check your FXML file 'simple.fxml'.";
@@ -888,6 +890,20 @@ public class AIRViewerController implements Initializable {
                 try {
 					JPEG a=new JPEG(model.getStrPath());
 					a.jpeg();
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
+		addStamp.setOnAction((ActionEvent event) -> {
+                try {
+					PdfStamp a=new PdfStamp(model.getStrPath());
+					a.addingStamp();
                     refreshUserInterface();
 				} catch (IOException | DocumentException e1) {
 					// TODO Auto-generated catch block
