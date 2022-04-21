@@ -36,6 +36,7 @@ public class TestPdfStamp {
 		try{
 			/*
 			 * here a call to the method will take place
+			 * addingStamp() is a method in java file where the functionality of the code of adding stamp to pdf will be there
 			 */
 			assertEquals(true,pdfObj.addingStamp());
 		} 
