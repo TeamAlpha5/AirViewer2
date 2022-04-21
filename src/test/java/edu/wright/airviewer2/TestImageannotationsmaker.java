@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 	 * @author Akhil Sabbella
 	 *
 	 */
-	public class TestImage {
+	public class TestImageAnnotationMaker {
 
 		//Here object will be initialized
 		static ImageAnnotationMaker  pObj = null;
