@@ -180,7 +180,7 @@ public class HtmlConversion {
 - We can see in this code that the file path length must be bigger than zero. This requirement must be met before the class constructor method and the htmlConversion() function can be executed.
 
 **Post-condition:**
-- - We can notice the condition "result==true" in this code. At the end of the htmlConversion() method's execution, this must equal "true."
+- We can notice the condition "result==true" in this code. At the end of the htmlConversion() method's execution, this must equal "true."
 
 
 
