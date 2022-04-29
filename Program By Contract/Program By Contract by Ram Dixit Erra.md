@@ -2,12 +2,9 @@
 ## Contract for Programming:
 
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 ## 1. Class RotateViewerModel
 
-``
+```
 /*
 *@Invariant("filePath!= null && filePath.length() > 0")
 */
@@ -41,7 +38,7 @@ public boolean rotatefn(String filePath) throws Exception, NullPointerException 
 --------------------------------
 
 }
-``
+```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 @ Invariant: The condition “filepath != null” and “filepath.length() > 0” must be true of a class whenever it is accessible to the client.
@@ -55,7 +52,7 @@ public boolean rotatefn(String filePath) throws Exception, NullPointerException 
 
 ## 2.	Class AddPageInPDF
 
-``
+```
 @Invariant("filePath!= null && filePath.length() > 0")
 public class AddPageInPDF {
         /*
@@ -85,7 +82,7 @@ public static void main(String[] args) throws IOException, PdfException {
 	}
 
 }
-``
+```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 @ Invariant: The condition “filepath != null” and “filepath.length() > 0” must be true of a class whenever it is accessible to the client.
 
@@ -100,7 +97,7 @@ public static void main(String[] args) throws IOException, PdfException {
 
 ## 3.	Class RemovePageInPDF
 
-``
+```
 /*
 *@Invariant("fileName!= null && fileName.length() > 0")
 */
@@ -134,7 +131,7 @@ public static void main(String[] args) throws IOException, PdfException {
 	}
 	 
 }
-``
+```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 @ Invariant: The condition “filepath != null” and “filepath.length() > 0” must be true of a class whenever it is accessible to the client.
 
@@ -147,7 +144,7 @@ public static void main(String[] args) throws IOException, PdfException {
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## 4.	Class EncryptPDF
 
-``
+```
 @Invariant("fileName!= null && fileName.length() > 0")
 public class EncryptPDF {
 
@@ -182,7 +179,7 @@ public static void main(String[] args) throws IOException, PdfException {
 	--------------------------
    }
 }
-``
+```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 @ Invariant: The condition “filepath != null” and “filepath.length() > 0” must be true of a class to ensure there is a pdf
 
