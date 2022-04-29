@@ -35,7 +35,7 @@ public class JPEG {
 	    }
 	@Requires("filePath != null && filePath.length() > 0")
 	@Ensures("result == true")
-	public void jpeg() throws Exception, NullPointerException
+	public boolean jpeg() throws Exception, NullPointerException
     {
 		
 /*
@@ -49,8 +49,8 @@ public class JPEG {
 - In this code, we can see the statement " @Invariant("filePath!= null && filePath.length() > 0") ". Here the file path should not be null and the file path length should be greater than zero. This condition must be true
 
 **Pre-condition:**
-- In this code we can see the condition file path should not be null. This condition must be true before the class constructor method can execute
-- In this code we can see the condition file path length should be greater than zero. This condition must be true before the execution of class constructor method and jpeg() method 
+- We can see in this code that the condition file path should not be null. Before the class constructor method may be executed, this condition must be met.
+- We can see in this code that the file path length must be bigger than zero. This requirement must be met before the class constructor method and the jpeg() function can be executed. 
 
 **Post-condition:**
 - In this code we can see the condition "result==true". This must be equals to "true" at the end of the execution of jpeg() method.
@@ -92,7 +92,7 @@ public class PNG {
 	 */
 	@Requires("filePath != null && filePath.length() > 0")
 	@Ensures("result == true")
-	public void png() throws Exception, NullPointerException
+	public boolean png() throws Exception, NullPointerException
     {
 		
 /*
@@ -108,7 +108,7 @@ public class PNG {
 ```
 
 **Invariant:**    
-- In this code, we can see the statement " @Invariant("filePath!= null && filePath.length() > 0") ". Here the file path should not be null and the file path length should be greater than zero. This condition must be true
+- The statement " @Invariant("filePath!= null && filePath.length() > 0") " can be found in this code. The file path should not be null in this case, and its length should be greater than zero. This condition has to be met.
 
 **Pre-condition:**
 - In this code we can see the condition file path should not be null. This condition must be true before the class constructor method can execute
@@ -176,8 +176,8 @@ public class HtmlConversion {
 - In this code, we can see the statement " @Invariant("filePath!= null && filePath.length() > 0") ". Here the file path should not be null and the file path length should be greater than zero. This condition must be true
 
 **Pre-condition:**
-- In this code we can see the condition file path should not be null. This condition must be true before the class constructor method can execute
-- In this code we can see the condition file path length should be greater than zero. This condition must be true before the execution of class constructor method and htmlConversion() method 
+- We can see in this code that the condition file path should not be null. Before the class constructor method may be executed, this condition must be met.
+- We can see in this code that the file path length must be bigger than zero. This requirement must be met before the class constructor method and the htmlConversion() function can be executed.
 
 **Post-condition:**
 - In this code we can see the condition "result==true". This must be equals to "true" at the end of the execution of htmlConversion() method.
@@ -241,7 +241,7 @@ public class DocConversion {
 ```
 
 **Invariant:**    
-- In this code, we can see the statement " @Invariant("filePath!= null && filePath.length() > 0") ". Here the file path should not be null and the file path length should be greater than zero. This condition must be true
+- The statement " @Invariant("filePath!= null && filePath.length() > 0") " can be found in this code. The file path should not be null in this case, and its length should be greater than zero. This condition has to be met.
 
 **Pre-condition:**
 - In this code we can see the condition file path should not be null. This condition must be true before the class constructor method can execute
@@ -313,8 +313,8 @@ public class TextConversion {
 - In this code, we can see the statement " @Invariant("filePath!= null && filePath.length() > 0") ". Here the file path should not be null and the file path length should be greater than zero. This condition must be true
 
 **Pre-condition:**
-- In this code we can see the condition file path should not be null. This condition must be true before the class constructor method can execute
-- In this code we can see the condition file path length should be greater than zero. This condition must be true before the execution of class constructor method and textConversion() method 
+- We can see in this code that the condition file path should not be null. Before the class constructor method may be executed, this condition must be met.
+- We can see in this code that the file path length must be bigger than zero. This requirement must be met before the class constructor method and the textConversion() function can be executed.
 
 **Post-condition:**
 - In this code we can see the condition "result==true". This must be equals to "true" at the end of the execution of textConversion() method.
@@ -378,7 +378,7 @@ public class Watermarkaddition {
 }
 ```
 **Invariant:**    
-- In this code, we can see the statement " @Invariant("filePath!= null && filePath.length() > 0") ". Here the file path should not be null and the file path length should be greater than zero. This condition must be true
+- The statement " @Invariant("filePath!= null && filePath.length() > 0") " can be found in this code. The file path should not be null in this case, and its length should be greater than zero. This condition has to be met.
 
 **Pre-condition:**
 - In this code we can see the condition file path should not be null. This condition must be true before the class constructor method can execute
@@ -447,8 +447,8 @@ public class PdfStamp {
 - In this code, we can see the statement " @Invariant("filePath!= null && filePath.length() > 0") ". Here the file path should not be null and the file path length should be greater than zero. This condition must be true
 
 **Pre-condition:**
-- In this code we can see the condition file path should not be null. This condition must be true before the class constructor method can execute
-- In this code we can see the condition file path length should be greater than zero. This condition must be true before the execution of class constructor method and addingStamp() method 
+- We can see in this code that the condition file path should not be null. Before the class constructor method may be executed, this condition must be met.
+- We can see in this code that the file path length must be bigger than zero. This requirement must be met before the class constructor method and the PdfStamp() function can be executed.
 
 **Post-condition:**
 - In this code we can see the condition "result==true". This must be equals to "true" at the end of the execution of addingStamp() method.
