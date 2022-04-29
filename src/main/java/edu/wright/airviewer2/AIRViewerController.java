@@ -180,6 +180,8 @@ public class AIRViewerController implements Initializable {
     private MenuItem Header;
     @FXML
     private MenuItem Footer;
+	  @FXML
+    private MenuItem convertIntoBMP;	
     private AIRViewerModel model;
     // imageview for showing current pdf page
     private ImageView currentPageImageView;
@@ -287,6 +289,7 @@ public class AIRViewerController implements Initializable {
 	    assert addStamp != null : "fx:id=\"addStamp\" was not injected: check your FXML file 'simple.fxml'.";
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoBMP != null : "fx:id=\"convertIntoBMP\" was not injected: check your FXML file 'simple.fxml'.";
         assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert removePageMenuItem != null : "fx:id=\"removePageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
 	assert encryptMenuItem != null : "fx:id=\"encryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -490,6 +493,7 @@ public class AIRViewerController implements Initializable {
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
 	assert addStamp != null : "fx:id=\"addStamp\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoBMP != null : "fx:id=\"convertIntoBMP\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoDoc != null : "fx:id=\"convertIntoDoc\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoText != null : "fx:id=\"convertIntoText\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoHtml != null : "fx:id=\"convertIntoHtml\" was not injected: check your FXML file 'simple.fxml'.";
@@ -939,6 +943,22 @@ public class AIRViewerController implements Initializable {
 				
 		}
 );
+		
+		
+		convertIntoBMP.setOnAction((ActionEvent event) -> {
+				BMPConversion abc=new BMPConversion(model.getStrPath());
+                try {
+					abc.bmpConversion();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                refreshUserInterface();
+				
+		}
+);
+		
+		
             convertIntoPNG.setOnAction((ActionEvent event) -> {
                 try {
                 	PNG a=new PNG(model.getStrPath());
