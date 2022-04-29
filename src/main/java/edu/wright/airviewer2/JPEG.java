@@ -46,7 +46,7 @@ public class JPEG {
 	 */
 	@Requires("filePath != null && filePath.length() > 0")
 	@Ensures("result == true")
-	public void jpeg() throws Exception, NullPointerException
+	public boolean jpeg() throws Exception, NullPointerException
     {
 		
 /*
@@ -77,6 +77,7 @@ public class JPEG {
         ImageIOUtil.writeImage(
                 bim, String.format(filePath+"-Image-%d.%s", page + 1, "JPEG"), 300);
     }
+		return true;
     }
 	
 }
