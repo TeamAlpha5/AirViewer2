@@ -1,6 +1,6 @@
 package edu.wright.airviewer2;
 
-/*import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.*;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -11,7 +11,7 @@ import com.google.java.contract.Invariant;
 import com.google.java.contract.Requires;
 import com.google.java.contract.Ensures;
 
-import com.itextpdf.kernel.exceptions.PdfException;*/
+import com.itextpdf.kernel.exceptions.PdfException;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfReader;
