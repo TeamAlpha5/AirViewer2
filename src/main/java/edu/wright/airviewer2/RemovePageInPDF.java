@@ -45,7 +45,7 @@ public class RemovePageInPDF {
 	      System.out.println("page removed");
 	      }
 	      else {
-	    	  return;
+	    	  return false;
 	      }
 	      //Saving the document
 	      document.save(fileName+"-1removePage.pdf");
