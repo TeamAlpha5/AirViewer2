@@ -11,6 +11,10 @@ import com.google.java.contract.Ensures;
  * @author Rahul Satla
  *
  */
+/**
+ * The class DocConversion is used for converting pdf to Document format with a constructor which takes a pdf file path.
+ * It contains docConversion() method which is used for the conversion of pdf to document format
+ */
 @Invariant("filePath!= null && filePath.length() > 0")
 public class DocConversion {	
 	String filePath;
@@ -39,6 +43,9 @@ public class DocConversion {
 	    {
 	    }
 	/**
+	 * This method is used for the conversion of pdf to document format
+	 * @pre(filepath.length()>0)
+	 * @post(result==true)
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */
