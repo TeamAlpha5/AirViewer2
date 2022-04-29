@@ -1,5 +1,6 @@
-Contract for programming:
-1. Class BoxAnnotationMaker 
+## Contract for programming:
+## 1. Class BoxAnnotationMaker 
+```
 /**
 *@invariant("contents!= null && contents.length()> 0")
 */
@@ -22,19 +23,24 @@ public class BoxAnnotationMaker {
         
     }
 }
+```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-@ Invariant: The condition “contents!= null” and “contents.length > 0” must be true of a class whenever it is accessible to the client.
+**@ Invariant:**
+- The condition “contents!= null” and “contents.length > 0” must be true of a class whenever it is accessible to the client.
 
-@pre-condition: 
+**@pre-condition:** 
 1.	The condition “contents != null” and “contents.length > 0” must be true before the constructor method can execute.
 2.	The condition "contents.length >= 1 " must be true before adding the Box annotation to the pdf.
 
-@post-condition: The condition "result == true" must be true, after adding Box annotation to the pdf.
+**@post-condition:**
+- The condition "result == true" must be true, after adding Box annotation to the pdf.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Contract for programming:
-2. Class EllipseAnnotationMaker 
+
+## 2. Class EllipseAnnotationMaker 
+
+```
 /**
 *@invariant("contents!= null && contents.length()> 0")
 */
@@ -59,19 +65,23 @@ int pageNumber = parseInt(arguments.get(0));
         
     }
 }
+```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-@ Invariant: The condition “contents!= null” and “contents.length > 0” must be true of a class whenever it is accessible to the client.
+**@ Invariant:**
+- The condition “contents!= null” and “contents.length > 0” must be true of a class whenever it is accessible to the client.
 
-@pre-condition: 
+**@pre-condition:** 
 1.	The condition “contents != null” and “contents.length > 0” must be true before the constructor method can execute.
 2.	The condition "contents.length >= 1 " must be true before adding an Eclipse annotation to the pdf.
 
-@post-condition: The condition "result == true" must be true, after adding Eclipse annotation to the pdf.
+**@post-condition:**
+- The condition "result == true" must be true, after adding Eclipse annotation to the pdf.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Contract for programming:
-3. Class TextAnnotationMaker 
+
+## 3. Class TextAnnotationMaker 
+```
 /**
 *@invariant("contents!= null && contents.length()> 0")
 */
@@ -95,20 +105,23 @@ int pageNumber = parseInt(arguments.get(0));
         
     }
 }
+```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-@ Invariant: The condition “contents!= null” and “contents.length > 0” must be true of a class whenever it is accessible to the client.
+**@ Invariant:**
+- The condition “contents!= null” and “contents.length > 0” must be true of a class whenever it is accessible to the client.
 
-@pre-condition: 
+**@pre-condition:** 
 1.	The condition “contents != null” and “contents.length > 0” must be true before the constructor method can execute.
 2.	The condition "contents.length >= 1 " must be true before adding the Text annotation to the pdf.
 
-@post-condition: The condition "result == true" must be true, after adding the Text annotation to the pdf.
+**@post-condition:** 
+- The condition "result == true" must be true, after adding the Text annotation to the pdf.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Contract for programming:
-Contract for programming:
-4. Class PPTConversion 
+
+## 4. Class PPTConversion 
+```
 /**
 *@Invariant("filePath!= null && filePath.length() > 0")
 */
@@ -131,14 +144,17 @@ public class PPTConversion {
 	}
 
 }
+```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-@ Invariant: The condition “filePath!= null” and “filePath.length > 0” must be true of a class whenever it is accessible to the client.
+**@ Invariant:**
+- The condition “filePath!= null” and “filePath.length > 0” must be true of a class whenever it is accessible to the client.
 
-@pre-condition: 
+**@pre-condition:** 
 1.	The condition “filePath != null” and “filePath.length > 0” must be true before the constructor method can execute.
 2.	The condition "filePath.length >= 1 " must be true before converting pdf to ppt.
 
-@post-condition: The condition "result == true" must be true, after converting it to ppt.
+**@post-condition:**
+- The condition "result == true" must be true, after converting it to ppt.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
