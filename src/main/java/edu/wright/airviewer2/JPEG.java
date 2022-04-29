@@ -16,6 +16,10 @@ import com.google.java.contract.Ensures;
  * @author Rahul Satla
  *
  */
+/**
+ * The class JPEG is used for converting pdf to JPEG picture format with a constructor which takes a pdf file path.
+ * It contains jpeg() method which is used for the conversion of pdf to jpeg picture format
+ */
 @Invariant("filePath!= null && filePath.length() > 0")
 public class JPEG {	
 	String filePath;
@@ -41,6 +45,9 @@ public class JPEG {
 	    {
 	    }
 	/**
+	 * This method is used for the conversion of pdf to jpeg file format
+	 * @pre(filepath.length()>0)
+	 * @post(result==true)
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */
