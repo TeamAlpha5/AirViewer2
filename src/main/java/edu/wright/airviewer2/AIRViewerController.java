@@ -177,10 +177,12 @@ public class AIRViewerController implements Initializable {
     @FXML
     private MenuItem Optimize;
     @FXML
+    private MenuItem Footer;
+    @FXML
     private MenuItem Header;
     @FXML
-    private MenuItem Footer;
-	  @FXML
+    private MenuItem convertIntoPPT;
+    @FXML
     private MenuItem convertIntoBMP;	
     private AIRViewerModel model;
     // imageview for showing current pdf page
@@ -283,11 +285,12 @@ public class AIRViewerController implements Initializable {
         assert pagination != null : "fx:id=\"pagination\" was not injected: check your FXML file 'simple.fxml'.";
         assert openMenuItem != null : "fx:id=\"openMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert saveAsMenuItem != null : "fx:id=\"saveAsMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-      assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-	   assert addWatermark != null : "fx:id=\"addWatermark\" was not injected: check your FXML file 'simple.fxml'.";
-        assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
-	    assert addStamp != null : "fx:id=\"addStamp\" was not injected: check your FXML file 'simple.fxml'.";
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	assert addWatermark != null : "fx:id=\"addWatermark\" was not injected: check your FXML file 'simple.fxml'.";
+        assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
+	assert addStamp != null : "fx:id=\"addStamp\" was not injected: check your FXML file 'simple.fxml'.";
+        assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoPPT != null : "fx:id=\"convertIntoPPT\" was not injected: check your FXML file 'simple.fxml'.";
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoBMP != null : "fx:id=\"convertIntoBMP\" was not injected: check your FXML file 'simple.fxml'.";
         assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -487,6 +490,7 @@ public class AIRViewerController implements Initializable {
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	assert converIntoPPT != null : "fx:id=\"converIntoPPT\" was not injected: check your FXML file 'simple.fxml'.";
         assert removePageMenuItem != null : "fx:id=\"removePageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert encryptMenuItem != null : "fx:id=\"encryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";       
@@ -1019,6 +1023,25 @@ public class AIRViewerController implements Initializable {
 				} 
                 
             });
+		
+		convertIntoPPT.setOnAction((ActionEvent event) -> {
+                try {
+					PPTConversion a=new PPTConversion(model.getStrPath());
+					
+					a.pptConversion();
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
+		
+		
+		
 		  convertIntoText.setOnAction((ActionEvent event) -> {
                 try {
 					TextConversion a=new TextConversion(model.getStrPath());
