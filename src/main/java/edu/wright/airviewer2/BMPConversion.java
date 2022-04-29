@@ -9,23 +9,46 @@ import com.aspose.pdf.devices.BmpDevice;
 import com.aspose.pdf.devices.Resolution;
 import com.google.java.contract.Ensures;
 
+/**
+ * @author Akhil sabbella
+ *
+ */
+/**
+ * The class DocConversion is used for converting pdf to bmp format with a constructor which takes a pdf file path.
+ * It contains docConversion() method which is used for the conversion of pdf to bmp format
+ */
+
 @Invariant("filePath!= null && filePath.length() > 0")
 public class BMPConversion{	
 	String filePath;
+	
+	/*
+	 * This is a constructor where it takes path of the pdf as a parameter
+	 * 
+	 * @param filePath
+	 * 
+	 * 
+	 */
 	
 	@Requires("filePath != null && filePath.length() > 0")
 	public BMPConversion(String filePath) {
 		this.filePath = filePath;
 	}
-    
-	public static void main(String[] args)
-	        throws IOException, DocumentException
-	    {
-	    }
+	
+	
+	/**
+	 * This method is used for the conversion of pdf to bmp format
+	 * @pre(filepath.length()>0)
+	 * @post(result==true)
+	 * @throws Exception
+	 * @throws NullPointerException
+	 */
+		
 	@Requires("filePath != null && filePath.length() > 0")
 	@Ensures("result == true")
 	@SuppressWarnings("unused")
 	public boolean bmpConversion() throws Exception, NullPointerException
+		
     {
 		Document pdfDocument = new Document(filePath);
 // Loop through all the pages of PDF file

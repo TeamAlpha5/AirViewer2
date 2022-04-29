@@ -21,9 +21,19 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-/*
+/**
+ * @author Akhil Sabbella
+ *
+ */
+
+/**
  * Class for Image Annotation Confirm Dialog
  */
+
+/**
+* Contains text fields which are used to give the desired size of the image.
+*/
+
 public class ImageAnnotationDialog extends Dialog<Object> {
 
     @FXML
@@ -50,6 +60,10 @@ public class ImageAnnotationDialog extends Dialog<Object> {
     
     public Window stage;
 
+/**
+*In this we will give the values for size of the text boxes on the dialog box
+*/
+	
     void setValueTextField(String x, String y) {
     	this.xTextField.setText(x);
     	this.yTextField.setText(y);
@@ -57,6 +71,10 @@ public class ImageAnnotationDialog extends Dialog<Object> {
     	this.heightTextField.setText("100");
     	this.imageFilePathTextField.setText("");
     }
+	
+	/**
+	* This is used to add the annotation to the pdf which will pop up when clicked.
+	*/
     public ImageAnnotationDialog(Window owner, String title, String x, String y) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -85,6 +103,12 @@ public class ImageAnnotationDialog extends Dialog<Object> {
 
             setOnShowing(dialogEvent -> Platform.runLater(() -> imageFileButton.requestFocus()));
         }
+	    
+	    /**
+	 * @throws IOException
+	 * @throws RuntimeException
+	 */
+	    
         catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -92,7 +116,11 @@ public class ImageAnnotationDialog extends Dialog<Object> {
     @FXML
     protected void doSomething() {
         System.out.println("This button was clicked!");
-    	
+	    
+ /**
+ *This is used to select the picture from the folder which we want to upload.
+ */
+	    
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open PDF File");
         fileChooser.setInitialFileName("");

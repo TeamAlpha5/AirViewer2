@@ -30,8 +30,18 @@ import org.apache.pdfbox.util.Matrix;
 
 /**
  *
- * @author erik
+ * @author Akhil Sabbella
  */
+
+
+/**
+ * Class for Image Annotation Maker
+ */
+
+/**
+ * In this ImageAnnotationMaker it will take four fields like w,x,y,z which are used when the image is opened.
+ */
+
 public class ImageAnnotationMaker {
 
     public static List<PDAnnotation> make(PDDocument document,
@@ -41,6 +51,10 @@ public class ImageAnnotationMaker {
 
         List<PDAnnotation> result = null;
 
+        /**
+ * Here we are adding attributes like height, width etc.,
+ */
+        
         try {
             int pageNumber = parseInt(arguments.get(0));
             float lowerLeftX = parseFloat(arguments.get(1));
@@ -57,10 +71,17 @@ public class ImageAnnotationMaker {
                 PDPageContentStream contents = new PDPageContentStream(document, page);
                 contents.drawImage(pdImage, lowerLeftX, lowerLeftY);
                 contents.close();                                 
-
+     /**
+	 * @catches IOException
+	 */
+                
             } catch (IOException ex) {
                 result = null;
             }
+            
+      /**
+	 * @catches NumberFormatException / NullPointerException
+	 */
         } catch (NumberFormatException | NullPointerException ex) {
             result = null;
         }
