@@ -8,19 +8,20 @@ import com.aspose.pdf.SaveFormat;
 import com.google.java.contract.Ensures;
 
 
-/**
- * @author Ravali Satla
- *
- */
+/**This class PdfOptimization has attribute file path which consists of location of pdf which needs to be optimized
+*
+@invariant ("filepath != null && numberOfPages.length() > 0")
+**author Ravali Satla
+*/
 @Invariant("filePath!= null && filePath.length() > 0")
 public class PdfOptimization {	
 	String filePath;
 	
-/*
- * This is a constructor where it takes path of the pdf as a parameter
- * @param filePath
- * 
- * 
+/**
+ * This constructor PdfOptimization takes the "filePath" as a parameter.
+ * @pre ("filepath != null && filepath > 0")
+ * @param filepath
+ *
  */
 	@Requires("filePath != null && filePath.length() > 0")
 	public PdfOptimization(String filePath) {
@@ -37,11 +38,19 @@ public class PdfOptimization {
 	        throws IOException, DocumentException
 	    {
 	    }
-	/**
-	 * @throws Exception
-	 * @throws NullPointerException
-	 */
-	@Requires("filePath != null && filePath.length() > 0")
+/**
+ * This method pdfOptimization() is used to optimize the PDF.
+ * 
+ * This function is using Apache PDF box library to achieve this purpose.
+ * 
+ * Reference link for this functionality: https://pdfbox.apache.org/docs/1.8.10/javadocs/index.html?org/apache/pdfbox/pdmodel/PDDocument.html
+ * The method uses optimize method which is used to optimize pdf.
+ * @pre ("filePath != null")
+ * @post ("result == true")
+ * @return
+ * @throws IOException
+ */
+    @Requires("filePath != null && filePath.length() > 0")
 	@Ensures("result == true")
 	@SuppressWarnings("unused")
 	public boolean pdfOptimization() throws Exception, NullPointerException
