@@ -8,7 +8,7 @@ import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
 import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
 import com.aspose.pdf.internal.imaging.internal.Exceptions.IO.IOException;
 import com.itextpdf.text.DocumentException;
-/**This class has attribute file path which consists of location of pdf which needs to be protected
+/**This class PdfPassword takes file path as an attribute  which consists of location of pdf which needs to be protected
 *
 @invariant ("filepath != null && numberOfPages.length() > 0")
 **author Ravali Satla
@@ -27,20 +27,23 @@ public class PdfPassword {
 		this.filePath = filePath;
 	
 	}
-    
+/**
+	 * @param args
+	 * @throws IOException
+	 * @throws DocumentException
+	 */    
 	public static void main(String[] args)
 	        throws IOException, DocumentException
 	    {
 	    }
-	
-	@SuppressWarnings("unused")
-	/**
+		/**
  * This method pdfpass(string pwd) uses password given by user to protect  the PDF.
  * 
  * This function is using Apache PDF box library to achieve this purpose.
  * 
  * Reference link for this functionality: https://pdfbox.apache.org/docs/1.8.10/javadocs/index.html?org/apache/pdfbox/pdmodel/PDDocument.html
- * 
+ * The method uses AccessPermission class which is used to set access permission to the file.
+ * This method uses StandardProtectionPolicy class to add Password based Protection for pdf.
  * @pre ("pwd.length>0")
  * @post ("result == true")
  * @return

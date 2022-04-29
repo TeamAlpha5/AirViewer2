@@ -10,9 +10,8 @@ import com.aspose.pdf.SaveFormat;
 import com.aspose.pdf.TextStamp;
 import com.aspose.pdf.VerticalAlignment;
 import com.google.java.contract.Ensures;
-
-
-/**
+/**The class HeaderAddition has filepath .It holds the location of pdf where the Header to the pdf should be added.
+ *The header will be added by headerAddition method
  * @author Ravali Satla
  *
  */
@@ -41,7 +40,9 @@ public class HeaderAddition {
 	        throws IOException, DocumentException
 	    {
 	    }
-	/**
+/**This method headerAddition is used to add the header to the pdf given.
+	 @pre(filepath.length()>0)
+	 @post(result==true)
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */

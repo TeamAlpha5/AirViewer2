@@ -10,9 +10,8 @@ import com.aspose.pdf.SaveFormat;
 import com.aspose.pdf.TextStamp;
 import com.aspose.pdf.VerticalAlignment;
 import com.google.java.contract.Ensures;
-
-
-/**
+/**The class FooterAddition has filepath .It holds the location of pdf where the footer to the pdf should be added.
+ *The footer will be added by footerAddition method
  * @author Ravali Satla
  *
  */
@@ -41,7 +40,9 @@ public class FooterAddition {
 	        throws IOException, DocumentException
 	    {
 	    }
-	/**
+/**This method footerAddition is used to add the footer to the pdf given.
+	 @pre(filepath.length()>0)
+	 @post(result==true)
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */
