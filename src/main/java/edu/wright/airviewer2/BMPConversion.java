@@ -35,15 +35,6 @@ public class BMPConversion{
 		this.filePath = filePath;
 	}
 	
-	/**
-	 *main method
-	 * @param args
-	 * @throws IOException
-	 * @throws DocumentException
-	 */
-	
-	public static void main(String[] args)
-	        throws IOException, DocumentException
 	
 	/**
 	 * This method is used for the conversion of pdf to bmp format
