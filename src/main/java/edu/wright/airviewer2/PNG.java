@@ -16,6 +16,10 @@ import com.google.java.contract.Ensures;
  * @author Rahul Satla
  *
  */
+/**
+ * The class PNG is used for converting pdf to PNG picture format with a constructor which takes a pdf file path.
+ * It contains png() method which is used for the conversion of pdf to png picture format
+ */
 @Invariant("filePath!= null && filePath.length() > 0")
 public class PNG {	
 	String filePath;	
@@ -42,6 +46,9 @@ public class PNG {
 	    {
 	    }
 	/**
+	 * This method is used for the conversion of pdf to png picture format
+	 * @pre(filepath.length()>0)
+	 * @post(result==true)
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */
