@@ -47,7 +47,7 @@ public class PNG {
 	 */
 	@Requires("filePath != null && filePath.length() > 0")
 	@Ensures("result == true")
-	public void png() throws Exception, NullPointerException
+	public boolean png() throws Exception, NullPointerException
     {
 		
 /*
@@ -78,6 +78,7 @@ public class PNG {
         ImageIOUtil.writeImage(
                 bim, String.format(filePath+"-Image-%d.%s", page + 1, "png"), 300);
     }
+		return true;
     }
 	
 }
