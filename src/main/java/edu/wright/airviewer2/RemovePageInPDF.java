@@ -2,6 +2,7 @@ package edu.wright.airviewer2;
 import com.itextpdf.text.DocumentException;
 import com.google.java.contract.Invariant;
 import com.google.java.contract.Requires;
+import com.google.java.contract.Ensures;
 import java.io.File;
 
 import javax.swing.JFrame;
