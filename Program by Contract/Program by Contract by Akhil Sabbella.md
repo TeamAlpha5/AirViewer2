@@ -24,13 +24,15 @@ public  ImageAnnotationMaker(String path, String pagenumber){
 ```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-**@ Invariant:** The condition “path!= null” and “pageNumber > 0” must be true of a class whenever it is accessible to the client.
+**@ Invariant:**
+- The condition “path!= null” and “pageNumber > 0” must be true of a class whenever it is accessible to the client.
 
-**@pre-condition: **
+**@pre-condition:**
 1.	The condition “path != null” and “pageNumber > 0” must be true before the constructor method can execute.
 2.	The condition "pageNumber>= 1.0 " must be true before the adding image to the pdf.
 
-**@post-condition:** The condition "result == true" must be true, after adding an image to the pdf.
+**@post-condition:** 
+- The condition "result == true" must be true, after adding an image to the pdf.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -54,12 +56,14 @@ public  ImageAnnotationdialog(String path, String pagenumber){
 ```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-**@ Invariant:** The condition “Imagefilepath!= null” must be true of a class whenever it is accessible to the client.
+**@ Invariant:** 
+- The condition “Imagefilepath!= null” must be true of a class whenever it is accessible to the client.
 
-**@pre-condition: **
+**@pre-condition:**
 1.	The condition “Imagefilepath != null” must be true before the constructor method can execute.
 
-**@post-condition:** The condition "result == true" must be true, after adding an image to the pdf.
+**@post-condition:** 
+- The condition "result == true" must be true, after adding an image to the pdf.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -99,7 +103,7 @@ public class BMPConversion{
 
 **Pre-condition:**
 - In this code we can see the condition file path should not be null. This condition must be true before the class constructor method can execute
-- In this code we can see the condition file path length should be greater than zero. This condition must be true before the execution of class constructor method and addingStamp() method
+- In this code we can see the condition file path length should be greater than zero. This condition must be true before the execution of class constructor method and bmpConversion() method
 
 **Post-condition:**
-- In this code we can see the condition "result==true". This must be equals to "true" at the end of the execution of addingStamp() method.
+- In this code we can see the condition "result==true". This must be equals to "true" at the end of the execution of bmpConversion() method.
