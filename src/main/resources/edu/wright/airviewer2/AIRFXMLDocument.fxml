@@ -76,6 +76,7 @@
                   <MenuItem fx:id="convertIntoDoc" mnemonicParsing="false" text="Document" />
                   <MenuItem fx:id="convertIntoText" mnemonicParsing="false" text="Text file" />
                   <MenuItem fx:id="convertIntoHtml" mnemonicParsing="false" text="HTML file" />
+		   <MenuItem fx:id="convertIntoBMP" mnemonicParsing="false" text="BMP file" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Functions">
