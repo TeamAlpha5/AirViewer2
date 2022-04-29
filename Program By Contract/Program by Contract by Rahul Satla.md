@@ -53,7 +53,7 @@ public class JPEG {
 - We can see in this code that the file path length must be bigger than zero. This requirement must be met before the class constructor method and the jpeg() function can be executed. 
 
 **Post-condition:**
-- In this code we can see the condition "result==true". This must be equals to "true" at the end of the execution of jpeg() method.
+- We can notice the condition "result==true" in this code. At the end of the jpeg() method's execution, this must equal "true."
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -180,7 +180,7 @@ public class HtmlConversion {
 - We can see in this code that the file path length must be bigger than zero. This requirement must be met before the class constructor method and the htmlConversion() function can be executed.
 
 **Post-condition:**
-- In this code we can see the condition "result==true". This must be equals to "true" at the end of the execution of htmlConversion() method.
+- - We can notice the condition "result==true" in this code. At the end of the htmlConversion() method's execution, this must equal "true."
 
 
 
@@ -317,7 +317,7 @@ public class TextConversion {
 - We can see in this code that the file path length must be bigger than zero. This requirement must be met before the class constructor method and the textConversion() function can be executed.
 
 **Post-condition:**
-- In this code we can see the condition "result==true". This must be equals to "true" at the end of the execution of textConversion() method.
+- We can notice the condition "result==true" in this code. At the end of the textConversion() method's execution, this must equal "true."
 
 
 
@@ -448,10 +448,10 @@ public class PdfStamp {
 
 **Pre-condition:**
 - We can see in this code that the condition file path should not be null. Before the class constructor method may be executed, this condition must be met.
-- We can see in this code that the file path length must be bigger than zero. This requirement must be met before the class constructor method and the PdfStamp() function can be executed.
+- We can see in this code that the file path length must be bigger than zero. This requirement must be met before the class constructor method and the addingStamp() function can be executed.
 
 **Post-condition:**
-- In this code we can see the condition "result==true". This must be equals to "true" at the end of the execution of addingStamp() method.
+- We can notice the condition "result==true" in this code. At the end of the addingStamp() method's execution, this must equal "true."
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
