@@ -40,7 +40,7 @@ public class MergePdf {
 	        throws IOException, DocumentException
 	    {
 	    }
-	@SuppressWarnings("deprecation")
+	
 /**The method mergepdf takes the location of pdf's that needs to be merged and PdfMergerUtility class is used to merge the pdf's.
 * @pre(filepath.length>0)
 * @post(result=true)
