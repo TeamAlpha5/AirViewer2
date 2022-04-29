@@ -16,6 +16,10 @@ import com.google.java.contract.Ensures;
  * @author Rahul Satla
  *
  */
+/**
+ * The class Watermarkaddition is used for adding watermark to the pdf with a constructor which takes a pdf file path.
+ * It contains watermarkAdd() method which is used for adding watermark to the pdf
+ */
 @Invariant("filePath!= null && filePath.length() > 0")
 public class Watermarkaddition {	
 	String filePath;
@@ -42,6 +46,9 @@ public class Watermarkaddition {
 	    {
 	    }
 	/**
+	 * This method is used for the addition of watermark to the pdf
+	 * @pre(filepath.length()>0)
+	 * @post(result==true)
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */

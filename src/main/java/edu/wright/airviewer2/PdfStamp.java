@@ -14,6 +14,10 @@ import com.google.java.contract.Ensures;
  * @author Rahul Satla
  *
  */
+/**
+ * The class PdfStamp is used for adding stamp to the pdf with a constructor which takes a pdf file path.
+ * It contains addingStamp() method which is used for the addition of stamp to the pdf.
+ */
 @Invariant("filePath!= null && filePath.length() > 0")
 public class PdfStamp {	
 	String filePath;
@@ -40,6 +44,9 @@ public class PdfStamp {
 	    {
 	    }
 	/**
+	 * This method is used for the addition of stamp to the pdf
+	 * @pre(filepath.length()>0)
+	 * @post(result==true)
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */

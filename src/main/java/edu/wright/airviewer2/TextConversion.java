@@ -16,6 +16,10 @@ import com.google.java.contract.Ensures;
  * @author Rahul Satla
  *
  */
+/**
+ * The class TextConversion is used for converting pdf to text format with a constructor which takes a pdf file path.
+ * It contains textConversion() method which is used for the conversion of pdf to text format
+ */
 @Invariant("filePath!= null && filePath.length() > 0")
 public class TextConversion {	
 	String filePath;
@@ -42,6 +46,9 @@ public class TextConversion {
 	    {
 	    }
 	/**
+	 * This method is used for the conversion of pdf to text file format
+	 * @pre(filepath.length()>0)
+	 * @post(result==true)
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */

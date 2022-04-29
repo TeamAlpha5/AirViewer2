@@ -14,6 +14,10 @@ import com.google.java.contract.Ensures;
  * @author Rahul Satla
  *
  */
+/**
+ * The class HtmlConversion is used for converting pdf to html format with a constructor which takes a pdf file path.
+ * It contains htmlConversion() method which is used for the conversion of pdf to html format
+ */
 @Invariant("filePath!= null && filePath.length() > 0")
 public class HtmlConversion {	
 	String filePath;
@@ -40,6 +44,9 @@ public class HtmlConversion {
 	    {
 	    }
 	/**
+	 * This method is used for the conversion of pdf to html format
+	 * @pre(filepath.length()>0)
+	 * @post(result==true)
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */
