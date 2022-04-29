@@ -30,14 +30,18 @@ public boolean mergepdf() throws IOException{
 ```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **@ Invariant:**
-- The condition “filepath != null” and “filepath.length() > 0” must be true of a class .
+- The condition “filepath != null” and “filepath.length() > 0” must be true of a class.
+
 **@pre-condition:** 
-1.The condition “file1 != null” and “file1.length() > 0” must be true to ensure there is a pdf.
-2.The condition “file2 != null” and “file2.length() > 0” must be true to ensure there is a pdf .
+- The condition “file1 != null” and “file1.length() > 0” must be true to ensure there is a pdf.
+- The condition “file2 != null” and “file2.length() > 0” must be true to ensure there is a pdf .
+
 **@post-condition:**
 - The condition "result == true" must be true when mergepdf()  method finished executing.It indicates that two pdfs are merged successfully.
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ## 2.Class SplitPdf 
 
 ```
@@ -77,8 +81,8 @@ public boolean splitpdf() throws Exception, NullPointerException
 - The condition “noofpages != null” and “noofpages.length() > 0,filepath != null and filepath.length() > 0” and must be true of a class .
 
 **@pre-condition:** 
-1.	The condition “noofpages != null” and “noofpages.length() > 0” must be true before the constructor method can execute.
-2.	The condition "filepath.length>0 " must be true before the splitpdf() method can execute.
+- The condition “noofpages != null” and “noofpages.length() > 0” must be true before the constructor method can execute.
+- The condition "filepath.length>0 " must be true before the splitpdf() method can execute.
 
 **@post-condition:** 
 - The condition "result == true" must be true when splitpdf()  method finished executing.It indicates that the pdf is split into pages and saved into the individual ones.
@@ -121,14 +125,15 @@ public class PdfPassword {
 - The condition “password != null” and “password.length() > 0” must be true of a class.
 
 **@pre-condition:**
-1.	The condition “password != null” and “password.length() > 0”  must be true before the constructor method can execute.
-2.	The condition "filepath  != null && filepath .length() > 0" must be true
-**@post-condition: **
--The condition "result == true" must be true when pdfpass(String password)  method finished executing.
+- The condition “password != null” and “password.length() > 0”  must be true before the constructor method can execute.
+- The condition "filepath  != null && filepath .length() > 0" must be true
+
+**@post-condition:**
+- The condition "result == true" must be true when pdfpass(String password)  method finished executing.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
-## 4.	class HeaderAddition
+## 4. class HeaderAddition
 ```
 /**
  * @invariant ("filePath!= null && filePath.length() > 0")
@@ -156,14 +161,14 @@ public class HeaderAddition {
 ```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **@Invariant:**
--The condition "filePath!= null && filePath.length() > 0" must be true of a class .
+- The condition "filePath!= null && filePath.length() > 0" must be true of a class .
 
 **@pre-condition:** 
-1.The condition "filePath!= null && filePath.length()" must be true before the constructor method can execute.
-2.The condition "header != null”, “header.length() > 0” must be true before the headerAddition(String header) method can execute.
+- The condition "filePath!= null && filePath.length()" must be true before the constructor method can execute.
+- The condition "header != null”, “header.length() > 0” must be true before the headerAddition(String header) method can execute.
 
 **@post-condition:**
--The condition "result == true" must be true when headerAddition(String header)  method finished executing.
+- The condition "result == true" must be true when headerAddition(String header)  method finished executing.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -195,14 +200,14 @@ public class FooterAddition {
 ```
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 **@ Invariant:**
--The condition "filePath!= null && filePath.length() > 0" must be true of a class .
+- The condition "filePath!= null && filePath.length() > 0" must be true of a class .
 
 **@pre-condition:** 
-1.The condition "filePath!= null && filePath.length()" must be true before the constructor method can execute.
-2.The condition "header != null”, “header.length() > 0” must be true before the footerAddition(String header) method can execute.
+- The condition "filePath!= null && filePath.length()" must be true before the constructor method can execute.
+- The condition "header != null”, “header.length() > 0” must be true before the footerAddition(String header) method can execute.
 
 **@post-condition:** 
--The condition "result == true" must be true when footerAddition(String header)  method finished executing.
+- The condition "result == true" must be true when footerAddition(String header)  method finished executing.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -237,8 +242,10 @@ public class PdfOptimzation {
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 **@ Invariant:**
 -The condition “filepath != null” and “filepath.length() > 0” must be true of a class.
+
 **@pre-condition:**
-1.The condition "filepath  != null && filepath .length() > 0" must be true
+- The condition "filepath  != null && filepath .length() > 0" must be true
+
 **@post-condition:**
 - The condition "result == true" must be true when   method finished executing.It indicates pdf is successfully optimized
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
