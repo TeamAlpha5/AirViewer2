@@ -18,8 +18,9 @@ public class JPEG {
  * This is a constructor where it takes path of the pdf as a parameter
  * @param filePath
  *  
- */
-	@Requires("filePath != null && filePath.length() > 0")
+ */	/*
+	@pre ("filePath != null && filePath.length() > 0")
+	*/
 	public JPEG(String filePath) {
 		this.filePath = filePath;
 	}
@@ -33,8 +34,10 @@ public class JPEG {
 	        throws IOException, DocumentException
 	    {
 	    }
-	@Requires("filePath != null && filePath.length() > 0")
-	@Ensures("result == true")
+	/*
+	@pre("filePath != null && filePath.length() > 0")
+	@post("result == true")
+	*/
 	public boolean jpeg() throws Exception, NullPointerException
     {
 		
@@ -72,7 +75,8 @@ public class PNG {
  * This is a constructor where it takes path of the pdf as a parameter
  * @param filePath 
  */
-	@Requires("filePath != null && filePath.length() > 0")
+
+	//@pre ("filePath != null && filePath.length() > 0")
 	public PNG(String filePath) {
 		this.filePath = filePath;
 	}
@@ -90,8 +94,8 @@ public class PNG {
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */
-	@Requires("filePath != null && filePath.length() > 0")
-	@Ensures("result == true")
+	// @pre ("filePath != null && filePath.length() > 0")
+	//@post ("result == true")
 	public boolean png() throws Exception, NullPointerException
     {
 		
@@ -136,7 +140,7 @@ public class HtmlConversion {
  * 
  * 
  */
-	@Requires("filePath != null && filePath.length() > 0")
+	//@pre ("filePath != null && filePath.length() > 0")
 	public HtmlConversion(String filePath) {
 		super();
 		this.filePath = filePath;
@@ -155,8 +159,8 @@ public class HtmlConversion {
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */
-	@Requires("filePath != null && filePath.length() > 0")
-	@Ensures("result == true")
+	//@pre ("filePath != null && filePath.length() > 0")
+	//@post ("result == true")
 	@SuppressWarnings("unused")
 	public boolean htmlConversion() throws Exception, NullPointerException
     {
@@ -205,7 +209,7 @@ public class DocConversion {
  * 
  * 
  */
-	@Requires("filePath != null && filePath.length() > 0")
+	//@pre ("filePath != null && filePath.length() > 0")
 	public DocConversion(String filePath) {
 		super();
 		this.filePath = filePath;
@@ -225,8 +229,8 @@ public class DocConversion {
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */
-	@Requires("filePath != null && filePath.length() > 0")
-	@Ensures("result == true")
+	//@pre("filePath != null && filePath.length() > 0")
+	//@post("result == true")
 	@SuppressWarnings("unused")
 	public boolean docConversion() throws Exception, NullPointerException
     {
@@ -271,7 +275,7 @@ public class TextConversion {
  * 
  * 
  */
-	@Requires("filePath != null && filePath.length() > 0")
+	// @pre ("filePath != null && filePath.length() > 0")
 	public TextConversion(String filePath) {
 		super();
 		this.filePath = filePath;
@@ -290,8 +294,8 @@ public class TextConversion {
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */
-	@Requires("filePath != null && filePath.length() > 0")
-	@Ensures("result == true")
+	//@pre ("filePath != null && filePath.length() > 0")
+	//@post ("result == true")
 	@SuppressWarnings("unused")
 	public boolean textConversion() throws Exception, NullPointerException
     	{
@@ -341,7 +345,7 @@ public class Watermarkaddition {
  * 
  * 
  */
-	@Requires("filePath != null && filePath.length() > 0")
+	// @pre ("filePath != null && filePath.length() > 0")
 	public Watermarkaddition(String filePath) {
 		super();
 		this.filePath = filePath;
@@ -360,8 +364,8 @@ public class Watermarkaddition {
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */
-	@Requires("filePath != null && filePath.length() > 0")
-	@Ensures("result == true")
+	//@pre ("filePath != null && filePath.length() > 0")
+	//@post ("result == true")
 	@SuppressWarnings("unused")
 	public boolean watermarkAdd() throws Exception, NullPointerException
 	{
@@ -406,7 +410,7 @@ public class PdfStamp {
  * 
  * 
  */
-	@Requires("filePath != null && filePath.length() > 0")
+	//@pre ("filePath != null && filePath.length() > 0")
 	public PdfStamp(String filePath) {
 		super();
 		this.filePath = filePath;
@@ -425,8 +429,8 @@ public class PdfStamp {
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */
-	@Requires("filePath != null && filePath.length() > 0")
-	@Ensures("result == true")
+	// @pre ("filePath != null && filePath.length() > 0")
+	// @post ("result == true")
 	@SuppressWarnings("unused")
 	public boolean addingStamp() throws Exception, NullPointerException
     {
