@@ -1,4 +1,4 @@
-## User Story 1(Issue: #1) (Story points:14)
+## User Story 1(Issue: #1) (Story points:13)
 
 **Status:**
 
@@ -7,7 +7,7 @@
 - Assigned @Rahul-Satla sprint 1 2pt priority 3: issue no #10: Add the UI buttons so that the user can convert the required PDF into a picture format.
 - Assigned @Rahul-Satla sprint 1 2pt priority 4: issue no #11: Test the code’s functionality, which converts PDF to JPEG with appropriate test cases.
 - Assigned @Rahul-Satla sprint 1 2pt priority 5: issue no #12: Test the code’s functionality, which converts PDF to PNG with appropriate test cases.
-- Assigned @Rahul-Satla sprint 1 2pt priority 6: issue no #13: Add all the dependencies required for converting PDF to picture formats.
+- Assigned @Rahul-Satla sprint 1 1pt priority 6: issue no #13: Add all the dependencies required for converting PDF to picture formats.
 
 ## User story 2(Issue: #2) (Story points:13)
 
@@ -23,13 +23,13 @@
 
 
 
-## User story 3(Issue: #3) (Story points:10)
+## User story 3(Issue: #3) (Story points:8)
 
 **Status:**
 
-- Assigned @RavaliSatla sprint 1  3pts priority 1: issue no #37: Write a function for protecting pdf using a password.
-- Assigned @RavaliSatla sprint 1  3pts priority 2: Write a method that takes password as user input from the user.
-- Assigned @RavaliSatla sprint 1  2pts priority 3: issue no #38:  Add all the dependencies and do UI changes that are required in generating password-protected pdf.
+- Assigned @RavaliSatla sprint 1  4pts priority 1: issue no #37: Write a function for protecting pdf using a password.
+- Assigned @RavaliSatla sprint 1  4pts priority 2: Write a method that takes password as user input from the user.
+- Assigned @RavaliSatla sprint 1  3pts priority 3: issue no #38:  Add all the dependencies and do UI changes that are required in generating password-protected pdf.
 - Assigned @RavaliSatla sprint 1  2pts priority 4: issue no #41: Test the coverage to protect the password function.
 
 ## User Story 4(Issue: #4) (Story points:13)
@@ -42,18 +42,18 @@
 - Assigned @RamDixitErra sprint 2  1pts priority 4: issue no #91: Link the remove page button with the remove page method in pdf.
 - Assigned @RamDixitErra sprint 2  3pts priority 5: issue no #112: Test whether the pages are getting removed from the pdf.
 
-## User story 5(Issue: #5) (Story points:20)
+## User story 5(Issue: #5) (Story points:21)
 
 **Status:**
 
-- Assigned @RahulSatla sprint 2  3pts priority 1: Write a function that converts PDF to DOC.
-- Assigned @RahulSatla sprint 2  3pts priority 2: Write a function that converts PDF to Text.
-- Assigned @RahulSatla sprint 2  3pts priority 3: Write a function that converts PDF to HTML.
+- Assigned @RahulSatla sprint 2  4pts priority 1: Write a function that converts PDF to DOC.
+- Assigned @RahulSatla sprint 2  4pts priority 2: Write a function that converts PDF to Text.
+- Assigned @RahulSatla sprint 2  4pts priority 3: Write a function that converts PDF to HTML.
 - Assigned @RahulSatla sprint 2  2pts priority 4: Add the UI button so that user can convert their required pdf into a file format.
 - Assigned @RahulSatla sprint 2  2pts priority 5: Test the code’s functionality, which converts pdf to doc with the appropriate test.
 - Assigned @RahulSatla sprint 2  2pts priority 6: Test the code’s functionality, which converts pdf to text with the appropriate test.
 - Assigned @RahulSatla sprint 2  2pts priority 7: Test the code’s functionality, which converts pdf to HTML with the appropriate test.
-- Assigned @RahulSatla sprint 2  3pts priority 8: Add all the required dependencies that are used to convert pdf to file formats.
+- Assigned @RahulSatla sprint 2  1pts priority 8: Add all the required dependencies that are used to convert pdf to file formats.
 
 
 
@@ -67,18 +67,18 @@
 - Assigned @RavaliSatla sprint 1  1pts priority 3: issue no #23: Add all the dependencies that are required for merging pdfs.
 - Assigned @RavaliSatla sprint 1  1pts priority 4: issue no #28: Test the functionality for merge pdfs.
 
-## User Story 7(Issue: #24) (Story points:15)
+## User Story 7(Issue: #24) (Story points:21)
 
 **Status:**
 
-- Assigned @Deepika-Gadiraju sprint 1 2pt priority 1: issue no #159: Create a class for generating dialog boxes defining specific parameters.
-- Assigned @Deepika-Gadiraju sprint 1 2pt priority 2: issue no #160: Write functionality for Box annotations.
-- Assigned @Deepika-Gadiraju sprint 1 2pt priority 3: issue no #161: Write functionality for Eclipse annotations.
-- Assigned @Deepika-Gadiraju sprint 1 2pt priority 4: issue no #162: Write functionality for Text annotations.
+- Assigned @Deepika-Gadiraju sprint 1 4pt priority 1: issue no #159: Create a class for generating dialog boxes defining specific parameters.
+- Assigned @Deepika-Gadiraju sprint 1 4pt priority 2: issue no #160: Write functionality for Box annotations.
+- Assigned @Deepika-Gadiraju sprint 1 4pt priority 3: issue no #161: Write functionality for Eclipse annotations.
+- Assigned @Deepika-Gadiraju sprint 1 3pt priority 4: issue no #162: Write functionality for Text annotations.
 - Assigned @Deepika-Gadiraju sprint 1 1pt priority 5: issue no #163: Add dependencies required for writing annotations.
-- Assigned @Deepika-Gadiraju sprint 1 2pt priority 6: issue no #183: Create a class for text annotation.
-- Assigned @Deepika-Gadiraju sprint 1 2pt priority 7: issue no #184: Create a class for box annotation.
-- Assigned @Deepika-Gadiraju sprint 1 2pt priority 8: issue no #185: Create a class for eclipse annotation.
+- Assigned @Deepika-Gadiraju sprint 1 3pt priority 6: issue no #183: Create a class for text annotation.
+- Assigned @Deepika-Gadiraju sprint 1 1pt priority 7: issue no #184: Create a class for box annotation.
+- Assigned @Deepika-Gadiraju sprint 1 1pt priority 8: issue no #185: Create a class for eclipse annotation.
 
 ## User Story 8(Issue: #24) (Story points:13)
 
@@ -91,7 +91,7 @@
 - Assigned @Deepika-Gadiraju sprint 2 2pt priority 5: issue no #81: Write test class for Zoom in and Zoom out functionalities.
 - Assigned @Deepika-Gadiraju sprint 2 2pt priority 6: issue no #82: Add the dependencies required for Zoom in and Zoom out functionalities.
 
-## User Story 9(issue: #65) (Story points:15)
+## User Story 9(issue: #65) (Story points:13)
 
 **Status:**
 
@@ -100,14 +100,14 @@
 - Assigned @Akhil-Sabbella sprint 1 2pt Priority 3: Issue no #73: Test the add image functionality by adding proper image format and by adding non-image files.
 - Assigned @Akhil-Sabbella sprint 1 2pt Priority 4: Issue no #74: Add the required dependencies used to add image functionality.
 - Assigned @Akhil-Sabbella sprint 1 3pt Priority 5: Issue no #152: Add box annotation pop up for add image functionality.
-- Assigned @Akhil-Sabbella sprint 1 2pt Priority 6: Issue no #177: Add the test file used to test Image Annotation Maker.
-- Assigned @Akhil-Sabbella sprint 1 2pt Priority 7: Issue no #178: Add the test file, which is used to test the image annotation dialog.
+- Assigned @Akhil-Sabbella sprint 1 1pt Priority 6: Issue no #177: Add the test file used to test Image Annotation Maker.
+- Assigned @Akhil-Sabbella sprint 1 1pt Priority 7: Issue no #178: Add the test file, which is used to test the image annotation dialog.
 
-## User Story 10(issue: #67) (Story points:5)
+## User Story 10(issue: #67) (Story points:4)
 **Status:**
 
 - Assigned @Akhil-Sabbella sprint 1 2pt Priority 1: Issue no #124: Add buttons for navigating to different pages in the pdf.
-- Assigned @Akhil-Sabbella sprint 1 3pt Priority 2: Issue no #125: Write a method for implementing page navigation.
+- Assigned @Akhil-Sabbella sprint 1 2pt Priority 2: Issue no #125: Write a method for implementing page navigation.
 
 ## User Story 11(issue: #85) (Story points:8)
 **Status:**
@@ -116,14 +116,14 @@
 - Assigned @Akhil-Sabbella sprint 2 3pt Priority 2: Issue no #40: Add all the required dependencies for Scrollbar Functionality.
 - Assigned @Akhil-Sabbella sprint 2 2pt Priority 3: Issue no #176: Test the scrollbar functionality.
 
-## User story 12(Issue: #86) (Story points:9)
+## User story 12(Issue: #86) (Story points:8)
 
 **Status:**
 
 - Assigned @RavaliSatla sprint 2  3pts priority 1: issue no #35: Add a method for Split functionality.
 - Assigned @RavaliSatla sprint 2  2pts priority 2: issue no #34: Add all the dependencies that are required for split functionality.
 - Assigned @RavaliSatla sprint 2  2pts priority 3: issue no #33: Add UI button for split functionality.
-- Assigned @RavaliSatla sprint 2  2pts priority 4: issue no #32: Test the functionality for split function.
+- Assigned @RavaliSatla sprint 2  1pts priority 4: issue no #32: Test the functionality for split function.
 
 
 ## User Story 13(Issue: #87) (Story points:8)
@@ -171,22 +171,22 @@
 - Assigned @RahulSatla sprint 2  4pts priority 4: issue no #169: Write a function that adds a PDF stamp.
 
 
-## User Story 18(issue: #192) (Story points:11)
+## User Story 18(issue: #192) (Story points:13)
 **Status:**
 
 - Assigned @Akhil-Sabbella sprint 2 4pt Priority 1: Issue no #193: Write a function to convert PDF format to BMP format.
-- Assigned @Akhil-Sabbella sprint 2 2pt Priority 2: Issue no #194: Test functionality of the code that converts PDF format to BMP format.
-- Assigned @Akhil-Sabbella sprint 2 2pt Priority 3: Issue no #195: Add the UI button so that users can convert PDF files to BMP file format directly.
+- Assigned @Akhil-Sabbella sprint 2 3pt Priority 2: Issue no #194: Test functionality of the code that converts PDF format to BMP format.
+- Assigned @Akhil-Sabbella sprint 2 3pt Priority 3: Issue no #195: Add the UI button so that users can convert PDF files to BMP file format directly.
 - Assigned @Akhil-Sabbella sprint 2 3pt Priority 4: Issue no #196: Add all the dependencies which are required to convert PDF format to BMP format.
 
-## User Story 19(Issue: #199) (Story points:9)
+## User Story 19(Issue: #199) (Story points:8)
 
 **Status:**
 
 - Assigned @Deepika-Gadiraju sprint 2 3pt priority 1: issue no #201: Write a function to convert PDF format to PPT format.
-- Assigned @Deepika-Gadiraju sprint 2 2pt priority 2: issue no #202: Add UI button used to convert the file from PDF format to PPT format.
-- Assigned @Deepika-Gadiraju sprint 2 2pt priority 3: issue no #203: Test the code’s functionality used for converting PDF format to PPT format.
-- Assigned @Deepika-Gadiraju sprint 2 2pt priority 4: issue no #204: Add all the dependencies which are required for converting PDF format to PPT format.
+- Assigned @Deepika-Gadiraju sprint 2 3pt priority 2: issue no #202: Add UI button used to convert the file from PDF format to PPT format.
+- Assigned @Deepika-Gadiraju sprint 2 1pt priority 3: issue no #203: Test the code’s functionality used for converting PDF format to PPT format.
+- Assigned @Deepika-Gadiraju sprint 2 1pt priority 4: issue no #204: Add all the dependencies which are required for converting PDF format to PPT format.
 
 
 
