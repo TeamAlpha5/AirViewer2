@@ -65,7 +65,7 @@ public class MergePdf {
     // Setting the destination file path
     
     obj.setDestinationFileName(
-        "C:/Users/wsucatslabs/Desktop/Amazon/hello.pdf");
+        "filePath+"-merged.pdf"");
 
     // Add all source files, to be merged
     JFileChooser fileChooser = new JFileChooser();
