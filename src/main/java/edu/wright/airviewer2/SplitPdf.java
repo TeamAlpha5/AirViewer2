@@ -85,8 +85,7 @@ public class SplitPdf {
         while (iteration.hasNext()) {
             PDDocument pd = iteration.next();
             try {
-				pd.save("C:/Users/wsucatslabs/Desktop/Amazon/Resume-"
-				        + j++ + ".pdf");
+				pd.save(filePath+"-"+ j++ + ".pdf");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
