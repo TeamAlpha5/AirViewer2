@@ -213,6 +213,7 @@ public class AIRViewerController implements Initializable {
     private ZoomType zoomType;
     String annotationRet = "";
     Stage stage;
+  // current mouse point clicked.(x, y points)
     float xInPage;
     float yInPage;
     
@@ -450,8 +451,8 @@ public class AIRViewerController implements Initializable {
         return scroller;
     }
     
-    // function that reinitialize with model
- // function that initialize event handler
+    
+ // function that initialize event handler 
     private void initEventHandler() {
     	
         EventHandler<ActionEvent> eventEventHandler = new EventHandler<ActionEvent>() {
@@ -460,6 +461,7 @@ public class AIRViewerController implements Initializable {
                 if(actionEvent.getSource()==loadButton){
                 	System.out.println("Click LoadButton!");
                 }
+	    // This code executes when addZoomButton is invoked, upon invokation of button the zoomfactor variable automatically increments by 1.05 and the page number will be updated.
                 else
                 if(model!=null){
                     if(actionEvent.getSource()==addZoomButton){
@@ -468,6 +470,7 @@ public class AIRViewerController implements Initializable {
                         updateImage(pagination.getCurrentPageIndex());
 
                     }
+		// This code executes when reduceZoomButton is invoked, upon invokation of button the zoomfactor variable automatically reduces the value by .95 and it updates the page number
                     else if(actionEvent.getSource()==reduceZoomButton){
                         setZoomType(ZoomType.CUSTOM);
                         zoomFactor*=.95;
@@ -477,7 +480,7 @@ public class AIRViewerController implements Initializable {
                 }
             }
         };
-
+       //These functions are used for invoking zoom function methods 
         addZoomButton.setOnAction(eventEventHandler);
         reduceZoomButton.setOnAction(eventEventHandler);
 
@@ -1098,6 +1101,7 @@ public class AIRViewerController implements Initializable {
 					
 			}
     );
+	// It adds Box annotation to the selected pdf file based on user requirements (height and width as constrains) and user will eb able to add text to the pdf file
             addBoxAnnotationMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
@@ -1110,11 +1114,7 @@ public class AIRViewerController implements Initializable {
                     refreshUserInterface();
                 }
             });
-            
-            
-            
-            
-            
+       // It adds Eclipse annotation to the selected pdf file based on user requirements (height and width as constrains) and user will eb able to add text to the pdf file      
             addEllipseAnnotationMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
@@ -1127,6 +1127,7 @@ public class AIRViewerController implements Initializable {
                     refreshUserInterface();
                 }
             });
+	// It adds text annotation to the selected pdf file based on user requirements (height and width as constrains) and user will eb able to add text to the pdf file 
             addTextAnnotationMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
@@ -1165,13 +1166,14 @@ public class AIRViewerController implements Initializable {
         AnchorPane.setLeftAnchor(scroller,0.0);
         AnchorPane.setBottomAnchor(scroller,70.0);
     }
-     // function that update zoom factor value and update current imageview with updated zoom factor value
+    // function that update zoom factor value and update current imageview with updated zoom factor value. This updates the value when ever the pdf is zoomed to the maximum and also reduced to the minimum.
     private void updateZoomFactor(){
         if(zoomType==ZoomType.WIDTH){
             if(model!=null&&model.getImage(pagination.getCurrentPageIndex())!=null){
                 zoomFactor=(float)((borderPane.getHeight()-20)/model.getImage(pagination.getCurrentPageIndex()).getWidth());
             }
         }
+	    //Every time when ever Zoom out function invoked it updates the value from maximum to minimum.
         else if(zoomType==ZoomType.HEIGHT){
             if(model!=null&&model.getImage(pagination.getCurrentPageIndex())!=null)
                 zoomFactor=(float)((borderPane.getHeight()-70)/model.getImage(pagination.getCurrentPageIndex()).getHeight());
