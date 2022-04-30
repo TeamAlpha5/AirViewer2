@@ -2,11 +2,11 @@
 March-18-2022
 
 **Participants:**
-- gadiraju.9@wright.edu
-- satla.3@wright.edu 
-- satla.2@wright.edu 
-- sabbella.2@wright.edu
-- erra.3@wright.edu.
+- Deepika Gadiraju: gadiraju.9@wright.edu 
+- Ravali Satla    :satla.3@wright.edu
+- Rahul Satla     :satla.2@wright.edu
+- AkhilSaiSathyanarayanaReddy Sabbella :sabbella.2@wright.edu
+- Ram Dixit Erra:erra.3@wright.edu.
 
 **Sprint Goal:**
 -	Introduction to sprint goals.
@@ -33,9 +33,6 @@ March-18-2022
 |6| Pdf annotations    | As an AirViewer2 user, should be able to add annotations to the pdf application. So, the user will be able to specify the size of the boxes by entering the required text into it.| Deepika Gadiraju  |
 |7| Add image to pdf     | As an AirViewer2 user, should be able to add an image to the pdf so that the user can add the image to the selected page based on their requirement.| Akhil Sabbella  |
 |8| Adding Page navigation      |As an AirViewer2 user, should be able to implement functionality on-page navigation so that users can navigate from one page to another page easily| Akhil Sabbella  |
-
-
-
 
 **What didn't go well?**
 - Estimation was a little tricky in some cases.
