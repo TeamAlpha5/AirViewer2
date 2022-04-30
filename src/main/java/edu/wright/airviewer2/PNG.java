@@ -1,7 +1,7 @@
 package edu.wright.airviewer2;
 import java.awt.image.BufferedImage;
-import java.io.*;
-import java.lang.*;
+import java.io.File;
+import java.io.IOException;
 import org.apache.pdfbox.pdmodel.PDDocument; 
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.rendering.ImageType;
@@ -15,6 +15,10 @@ import com.google.java.contract.Ensures;
 /**
  * @author Rahul Satla
  *
+ */
+/**
+ * The class PNG is used for converting pdf to PNG picture format with a constructor which takes a pdf file path.
+ * It contains png() method which is used for the conversion of pdf to png picture format
  */
 @Invariant("filePath!= null && filePath.length() > 0")
 public class PNG {	
@@ -42,12 +46,15 @@ public class PNG {
 	    {
 	    }
 	/**
+	 * This method is used for the conversion of pdf to png picture format
+	 * @pre(filepath.length()>0)
+	 * @post(result==true)
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */
 	@Requires("filePath != null && filePath.length() > 0")
 	@Ensures("result == true")
-	public void png() throws Exception, NullPointerException
+	public boolean png() throws Exception, NullPointerException
     {
 		
 /*
@@ -78,6 +85,7 @@ public class PNG {
         ImageIOUtil.writeImage(
                 bim, String.format(filePath+"-Image-%d.%s", page + 1, "png"), 300);
     }
+		return true;
     }
 	
 }

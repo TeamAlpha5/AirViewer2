@@ -1,7 +1,7 @@
 package edu.wright.airviewer2;
 import java.awt.image.BufferedImage;
-import java.io.*;
-import java.lang.*;
+import java.io.File;
+import java.io.IOException;
 import org.apache.pdfbox.pdmodel.PDDocument; 
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.rendering.ImageType;
@@ -15,6 +15,10 @@ import com.google.java.contract.Ensures;
 /**
  * @author Rahul Satla
  *
+ */
+/**
+ * The class JPEG is used for converting pdf to JPEG picture format with a constructor which takes a pdf file path.
+ * It contains jpeg() method which is used for the conversion of pdf to jpeg picture format
  */
 @Invariant("filePath!= null && filePath.length() > 0")
 public class JPEG {	
@@ -41,12 +45,15 @@ public class JPEG {
 	    {
 	    }
 	/**
+	 * This method is used for the conversion of pdf to jpeg file format
+	 * @pre(filepath.length()>0)
+	 * @post(result==true)
 	 * @throws Exception
 	 * @throws NullPointerException
 	 */
 	@Requires("filePath != null && filePath.length() > 0")
 	@Ensures("result == true")
-	public void jpeg() throws Exception, NullPointerException
+	public boolean jpeg() throws Exception, NullPointerException
     {
 		
 /*
@@ -77,6 +84,7 @@ public class JPEG {
         ImageIOUtil.writeImage(
                 bim, String.format(filePath+"-Image-%d.%s", page + 1, "JPEG"), 300);
     }
+		return true;
     }
 	
 }

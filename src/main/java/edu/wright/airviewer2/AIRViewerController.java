@@ -46,23 +46,39 @@ import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import com.itextpdf.text.DocumentException;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Pagination;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import javafx.scene.layout.AnchorPane;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.colors.DeviceCmyk;
 import com.itextpdf.kernel.colors.DeviceGray;
@@ -83,23 +99,22 @@ import com.itextpdf.kernel.pdf.WriterProperties;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import java.io.File;
 /**
- *
+ * class for AIRViewer Controller
  * @author erik
  * @author Rahul Satla
  */
 public class AIRViewerController implements Initializable {
-
-    static final String DEFAULT_PATH = "sample.pdf";
-
+	// default pdf path
+ static final String DEFAULT_PATH = "sample.pdf";
+    // pagination of fxml
     @FXML
     private Pagination pagination;
 
+   // open menuitem
     @FXML
     private MenuItem openMenuItem;
-
     @FXML
-    private MenuItem saveAsMenuItem;
-
+    private MenuItem saveAsMenuItem, encyptPDFMenuItem;
     @FXML
     private MenuItem closeMenuItem;
     @FXML
@@ -107,63 +122,101 @@ public class AIRViewerController implements Initializable {
     @FXML
     private MenuItem convertIntoPNG;
     @FXML
+    private MenuItem addWatermark;
+    @FXML
     private MenuItem convertIntoDoc;
     @FXML
     private MenuItem convertIntoText;
     @FXML
     private MenuItem convertIntoHtml;
-
+	@FXML
+    private MenuItem addStamp;
     @FXML
     private MenuItem extractTextMenuItem;
-
     @FXML
     private MenuItem undoMenuItem;
-
     @FXML
     private MenuItem redoMenuItem;
+    @FXML
+    private ToolBar toolBar;
+    @FXML
+    private Button addImageButton;
     @FXML
     private MenuItem mergePDF;
     @FXML
     private MenuItem splitPDF;
     @FXML
-    private MenuItem addBoxAnnotationMenuItem;
-    
+    private MenuItem addBoxAnnotationMenuItem; 
     @FXML
     private MenuItem scrollMenuItem;
-
     @FXML
     private MenuItem addEllipseAnnotationMenuItem;
-
     @FXML
     private MenuItem addTextAnnotationMenuItem;
-
     @FXML
-    private MenuItem deleteAnnotationMenuItem;
-    
+    private MenuItem deleteAnnotationMenuItem;  
     @FXML
-    private MenuItem rotateMenuItem; 
-	
+    private MenuItem rotateMenuItem; 	
     @FXML
-    private MenuItem addPageMenuItem;
-     
+    private MenuItem addPageMenuItem;   
     @FXML
-    private MenuItem removePageMenuItem;
-	
-@FXML
-    private MenuItem encryptMenuItem;
-    
+    private MenuItem protectPassword;
     @FXML
-    private MenuItem decryptMenuItem;
-	
-   
+    private BorderPane borderPane;
+    private MenuItem removePageMenuItem;	
+    @FXML
+    private HBox zoomOptionsBox,loadOptionsBox;
+    @FXML
+    private Button loadButton,reduceZoomButton,addZoomButton;
+	  @FXML
+    private MenuItem encryptMenuItem;   
+    @FXML
+    private MenuItem decryptMenuItem;	
+    @FXML
+    private ScrollPane scroller;
+    @FXML
+    private MenuItem Optimize;
+    @FXML
+    private MenuItem Footer;
+    @FXML
+    private MenuItem Header;
+    @FXML
+    private MenuItem convertIntoPPT;
+    @FXML
+    private MenuItem convertIntoBMP;	
     private AIRViewerModel model;
+    // imageview for showing current pdf page
     private ImageView currentPageImageView;
-
     private Group pageImageGroup;
-    
     private String fileName=null;
-    
     private String anFile=null;
+
+    // zoom factor value
+    private float zoomFactor = (float) 1.0;
+    
+
+	private String anFile=null;
+	// stackpane for pdf viewer
+    SimpleObjectProperty<StackPane> currentImage;
+    
+    
+  
+	   
+    String annotationRet = "";
+    
+    
+    // function that load pdf model with pdf file absoulute path
+
+    // zoom type enum values
+    public enum ZoomType{WIDTH,HEIGHT,CUSTOM};
+    
+    private ZoomType zoomType;
+    String annotationRet = "";
+    Stage stage;
+    float xInPage;
+    float yInPage;
+    
+
 
     private AIRViewerModel promptLoadModel(String startPath) {
 
@@ -190,11 +243,11 @@ public class AIRViewerController implements Initializable {
 
         return loadedModel;
     }
-
+ // function that synchronize the selection knobs
     private void synchronizeSelectionKnobs() {
         if (null != model && null != currentPageImageView && null != pageImageGroup) {
             List<java.awt.Rectangle> selectedAreas = model.getSelectedAreas();
-            ArrayList<Node> victims = new ArrayList<>(pageImageGroup.getChildren());
+            ArrayList<Node> victims = new ArrayList<Node>(pageImageGroup.getChildren());
             
             // Delete everything in teh group that isn't currentPageImageView
             victims.stream().filter((n) -> (n != currentPageImageView)).forEach((n) -> {
@@ -223,26 +276,32 @@ public class AIRViewerController implements Initializable {
         }
 
     }
-
+ // function that update toolbar
+    private void updateToolbar() {
+    }
+    
+    // function that refresh user interface 
     private void refreshUserInterface() {
         assert pagination != null : "fx:id=\"pagination\" was not injected: check your FXML file 'simple.fxml'.";
         assert openMenuItem != null : "fx:id=\"openMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert saveAsMenuItem != null : "fx:id=\"saveAsMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	assert addWatermark != null : "fx:id=\"addWatermark\" was not injected: check your FXML file 'simple.fxml'.";
+        assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
+	assert addStamp != null : "fx:id=\"addStamp\" was not injected: check your FXML file 'simple.fxml'.";
+        assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoPPT != null : "fx:id=\"convertIntoPPT\" was not injected: check your FXML file 'simple.fxml'.";
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoBMP != null : "fx:id=\"convertIntoBMP\" was not injected: check your FXML file 'simple.fxml'.";
         assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert removePageMenuItem != null : "fx:id=\"removePageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-	
 	assert encryptMenuItem != null : "fx:id=\"encryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-        
-
 	assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoDoc != null : "fx:id=\"convertIntoDoc\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoText != null : "fx:id=\"convertIntoText\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoHtml != null : "fx:id=\"convertIntoHtml\" was not injected: check your FXML file 'simple.fxml'.";
-
         assert extractTextMenuItem != null : "fx:id=\"extractTextMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
 	assert undoMenuItem != null : "fx:id=\"undoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert redoMenuItem != null : "fx:id=\"redoMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -253,17 +312,20 @@ public class AIRViewerController implements Initializable {
         assert deleteAnnotationMenuItem != null : "fx:id=\"deleteAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert mergePDF != null : "fx:id=\"mergePDF\" was not injected: check your FXML file 'simple.fxml'.";
 	assert splitPDF != null : "fx:id=\"splitPDF\" was not injected: check your FXML file 'simple.fxml'.";
+	assert Optimize!=null:"fx:id=\"Optimize\" was not injected: check your FXML file 'simple.fxml'.";
+	assert Header!=null:"fx:id=\"Optimize\" was not injected: check your FXML file 'simple.fxml'.";
+	assert Footer!=null:"fx:id=\"Optimize\" was not injected: check your FXML file 'simple.fxml'.";
         if (null != model) {
             pagination.setPageCount(model.numPages());
             pagination.setDisable(false);
             saveAsMenuItem.setDisable(false);
+	    encyptPDFMenuItem.setDisable(false);
             extractTextMenuItem.setDisable(false);
             undoMenuItem.setDisable(!model.getCanUndo());
             undoMenuItem.setText("Undo " + model.getSuggestedUndoTitle());
             redoMenuItem.setDisable(!model.getCanRedo());
             redoMenuItem.setText("Redo " + model.getSuggestedRedoTitle());
             addBoxAnnotationMenuItem.setDisable(false);
-            scrollMenuItem.setDisable(false);
             addEllipseAnnotationMenuItem.setDisable(false);
             addTextAnnotationMenuItem.setDisable(false);
             deleteAnnotationMenuItem.setDisable(0 >= model.getSelectionSize());
@@ -271,6 +333,7 @@ public class AIRViewerController implements Initializable {
             if (null != currentPageImageView) {
                 int pageIndex = pagination.getCurrentPageIndex();
                 currentPageImageView.setImage(model.getImage(pageIndex));
+		    // catch the x,y coordination of mouse clicked now
                 currentPageImageView.setOnMousePressed(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent me) {
@@ -278,8 +341,8 @@ public class AIRViewerController implements Initializable {
                         System.out.println("Mouse pressed X: " + me.getX()
                                 + " Y: " + Float.toString(flippedY));
 
-                        float xInPage = (float) me.getX();
-                        float yInPage = flippedY;
+                        xInPage = (float) me.getX();
+                        yInPage = flippedY;
 
                         if (null != model) {
                             int pageIndex = pagination.getCurrentPageIndex();
@@ -309,6 +372,7 @@ public class AIRViewerController implements Initializable {
             });
             pagination.setDisable(true);
             saveAsMenuItem.setDisable(true);
+	    encyptPDFMenuItem.setDisable(true);
             extractTextMenuItem.setDisable(true);
             undoMenuItem.setDisable(true);
             redoMenuItem.setDisable(true);
@@ -321,6 +385,104 @@ public class AIRViewerController implements Initializable {
         }
     }
 
+	
+     // function that show annotation dialog with title and x, y
+    private void ShowAnnotationDialog(String title, String x, String y) {
+    	
+    	AnnotationDialog dialog = new AnnotationDialog(stage, title, x, y);
+    	dialog.showAndWait().ifPresent(result -> {
+        String ret = result.toString();
+    	annotationRet = ret;
+    	System.out.println("Annnotaion!"+result.toString());
+    	});
+    }
+	
+	    // function that update image of current imageview as the selected page of pdf ifle.
+    private void updateImage(int index) {
+    	
+        if(scroller!=null)
+        	// scroller initialize
+            scroller.setVvalue(0);
+        StackPane stackPane = new StackPane();
+//        stackPane.setMinWidth(borderPane.getWidth()-20);
+        
+        currentPageImageView = new ImageView();
+        if(model!=null){
+            Image image = model.getImage(index);
+            if(image!=null)
+            	currentPageImageView.setImage(image);
+        }
+        
+        // add the current imageview to stackpane
+        stackPane.getChildren().add(currentPageImageView);
+        // set stackpane to currentImage ("SimpleObjectProperty<StackPane>")
+        currentImage.set(stackPane);
+    }
+    
+    // function that initialize scroller
+    private void initScroller() {
+        currentImage = new SimpleObjectProperty<StackPane>();
+        updateImage(0);
+	       scroller = new ScrollPane();
+        AnchorPane.setTopAnchor(scroller,0.0);
+        AnchorPane.setRightAnchor(scroller,0.0);
+        AnchorPane.setLeftAnchor(scroller,0.0);
+        AnchorPane.setBottomAnchor(scroller,70.0);
+        scroller.contentProperty().bind(currentImage);
+    }
+    
+    // function that show image annotaion dialog with title and x, y coordination
+    private void showImageAnnotationDialog(String title, String x, String y) {
+    	ImageAnnotationDialog dialog = new ImageAnnotationDialog(stage, title, x, y);
+    	dialog.showAndWait().ifPresent(result -> {
+    		String ret = result.toString();
+    		annotationRet = ret;
+    	    System.out.println("Annnotaion!"+result.toString());
+    	});
+    }
+    
+    // function that create pdf image with index of pages
+    private Node createPdfImage(int index) {
+    	System.out.println(index);
+        updateImage(index);
+        model.deselectAll();
+        refreshUserInterface();
+        return scroller;
+    }
+    
+    // function that reinitialize with model
+ // function that initialize event handler
+    private void initEventHandler() {
+    	
+        EventHandler<ActionEvent> eventEventHandler = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if(actionEvent.getSource()==loadButton){
+                	System.out.println("Click LoadButton!");
+                }
+                else
+                if(model!=null){
+                    if(actionEvent.getSource()==addZoomButton){
+                        setZoomType(ZoomType.CUSTOM);
+                        zoomFactor*=1.05;
+                        updateImage(pagination.getCurrentPageIndex());
+
+                    }
+                    else if(actionEvent.getSource()==reduceZoomButton){
+                        setZoomType(ZoomType.CUSTOM);
+                        zoomFactor*=.95;
+                        updateImage(pagination.getCurrentPageIndex());
+
+                    }
+                }
+            }
+        };
+
+        addZoomButton.setOnAction(eventEventHandler);
+        reduceZoomButton.setOnAction(eventEventHandler);
+
+    }
+    
     private AIRViewerModel reinitializeWithModel(AIRViewerModel aModel) {
         assert pagination != null : "fx:id=\"pagination\" was not injected: check your FXML file 'simple.fxml'.";
         assert openMenuItem != null : "fx:id=\"openMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
@@ -328,12 +490,14 @@ public class AIRViewerController implements Initializable {
         assert closeMenuItem != null : "fx:id=\"closeMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert rotateMenuItem != null : "fx:id=\"rotateMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addPageMenuItem != null : "fx:id=\"addPageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+	assert converIntoPPT != null : "fx:id=\"converIntoPPT\" was not injected: check your FXML file 'simple.fxml'.";
         assert removePageMenuItem != null : "fx:id=\"removePageMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert encryptMenuItem != null : "fx:id=\"encryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-        assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
-               
+        assert decryptMenuItem != null : "fx:id=\"decryptMenuItem\" was not injected: check your FXML file 'simple.fxml'.";       
         assert convertIntoJPEG != null : "fx:id=\"convertIntoJPEG\" was not injected: check your FXML file 'simple.fxml'.";
         assert convertIntoPNG != null : "fx:id=\"convertIntoPNG\" was not injected: check your FXML file 'simple.fxml'.";
+	assert addStamp != null : "fx:id=\"addStamp\" was not injected: check your FXML file 'simple.fxml'.";
+	assert convertIntoBMP != null : "fx:id=\"convertIntoBMP\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoDoc != null : "fx:id=\"convertIntoDoc\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoText != null : "fx:id=\"convertIntoText\" was not injected: check your FXML file 'simple.fxml'.";
 	assert convertIntoHtml != null : "fx:id=\"convertIntoHtml\" was not injected: check your FXML file 'simple.fxml'.";
@@ -345,6 +509,8 @@ public class AIRViewerController implements Initializable {
         assert addEllipseAnnotationMenuItem != null : "fx:id=\"addEllipseAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert addTextAnnotationMenuItem != null : "fx:id=\"addTextAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
         assert deleteAnnotationMenuItem != null : "fx:id=\"deleteAnnotationMenuItem\" was not injected: check your FXML file 'simple.fxml'.";
+        assert protectPassword!=null:"fx:id=\"protectPassword\" was not injected: check your FXML file 'simple.fxml'.";
+	assert Optimize!=null:"fx:id=\"Optimize\" was not injected: check your FXML file 'simple.fxml'.";
         model = aModel;
         openMenuItem.setOnAction((ActionEvent e) -> {
             System.out.println("Open ...");
@@ -541,7 +707,10 @@ public class AIRViewerController implements Initializable {
             }
         });
         addPageMenuItem.setDisable(false);
-        
+
+	
+       if (null != model) {
+    
 	    
 	removePageMenuItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -657,26 +826,14 @@ public class AIRViewerController implements Initializable {
             //reinitializeWithModel(promptLoadModel(AIRViewerController.DEFAULT_PATH));
         });
         encryptMenuItem.setDisable(false);
-        
-        
-       /* decryptMenuItem.setOnAction((ActionEvent e) -> {
-            System.out.println("decrypt ...");
-            //reinitializeWithModel(promptLoadModel(AIRViewerController.DEFAULT_PATH));
-        });
-        decryptMenuItem.setDisable(false);*/
-	    
-	    
-	    
-	    
-	    
-        
         if (null != model) {
             Stage stage = AIRViewer.getPrimaryStage();
             assert null != stage;
-
             model.deselectAll();
-
+            initScroller();
             pagination.setPageCount(model.numPages());
+		pagination.setCurrentPageIndex(0);
+            pagination.setPageFactory(index -> createPdfImage(index));
             pagination.setPageFactory(index -> {
                 if (null == pageImageGroup) {
                     pageImageGroup = new Group();
@@ -703,6 +860,40 @@ public class AIRViewerController implements Initializable {
                     model.save(file);
                 }
             });
+		Header.setOnAction((ActionEvent event) -> {
+                try {
+                	HeaderAddition a=new HeaderAddition(model.getStrPath());
+				
+					 String header = JOptionPane.showInputDialog("Enter the Header");
+					a.headerAddition(header);
+					
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
+            Footer.setOnAction((ActionEvent event) -> {
+                try {
+                	FooterAddition a=new FooterAddition(model.getStrPath());
+				
+					 String footer = JOptionPane.showInputDialog("Enter the Header");
+					a.footerAddition(footer);
+					
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
             convertIntoJPEG.setOnAction((ActionEvent event) -> {
                 try {
 					JPEG a=new JPEG(model.getStrPath());
@@ -717,6 +908,61 @@ public class AIRViewerController implements Initializable {
 				} 
                 
             });
+		addStamp.setOnAction((ActionEvent event) -> {
+                try {
+					PdfStamp a=new PdfStamp(model.getStrPath());
+					a.addingStamp();
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
+	        protectPassword.setOnAction((ActionEvent event) -> {
+                PdfPassword a=new PdfPassword(model.getStrPath());
+              
+              String pwd = JOptionPane.showInputDialog("Enter the password ");  
+                try {
+					a.pdfpass(pwd);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                refreshUserInterface();
+			}
+    );
+		Optimize.setOnAction((ActionEvent event) -> {
+				PdfOptimization a=new PdfOptimization(model.getStrPath());
+                try {
+					a.pdfOptimization();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                refreshUserInterface();
+				
+		}
+);
+		
+		
+		convertIntoBMP.setOnAction((ActionEvent event) -> {
+				BMPConversion abc=new BMPConversion(model.getStrPath());
+                try {
+					abc.bmpConversion();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+                refreshUserInterface();
+				
+		}
+);
+		
+		
             convertIntoPNG.setOnAction((ActionEvent event) -> {
                 try {
                 	PNG a=new PNG(model.getStrPath());
@@ -731,6 +977,21 @@ public class AIRViewerController implements Initializable {
 				} 
                 
             });
+		addWatermark.setOnAction((ActionEvent event) -> {
+                try {
+                	Watermarkaddition a=new Watermarkaddition(model.getStrPath());
+					a.watermarkAdd();
+              refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });    
+                  
 		  convertIntoHtml.setOnAction((ActionEvent event) -> {
                 try {
 					HtmlConversion a=new HtmlConversion(model.getStrPath());
@@ -762,6 +1023,25 @@ public class AIRViewerController implements Initializable {
 				} 
                 
             });
+		
+		convertIntoPPT.setOnAction((ActionEvent event) -> {
+                try {
+					PPTConversion a=new PPTConversion(model.getStrPath());
+					
+					a.pptConversion();
+                    refreshUserInterface();
+				} catch (IOException | DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
+                
+            });
+		
+		
+		
 		  convertIntoText.setOnAction((ActionEvent event) -> {
                 try {
 					TextConversion a=new TextConversion(model.getStrPath());
@@ -777,6 +1057,13 @@ public class AIRViewerController implements Initializable {
 				} 
                 
             });
+		
+	    encyptPDFMenuItem.setOnAction((ActionEvent event) -> {
+            	FileChooser fileChooser = new FileChooser();
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+                fileChooser.getExtensionFilters().add(extFilter);
+                File file = fileChooser.showSaveDialog((Stage) pagination.getScene().getWindow());
+                });
             extractTextMenuItem.setOnAction((ActionEvent e) -> {
                 System.out.println("extractTextMenuItem ...");
             });
@@ -814,9 +1101,12 @@ public class AIRViewerController implements Initializable {
             addBoxAnnotationMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
+		    ShowAnnotationDialog("AddBoxAnnotation", String.valueOf(xInPage), String.valueOf(yInPage));
+                    String vals[] = annotationRet.split(",");
+                    System.out.println(vals[0]+","+vals[1]+","+vals[2]+","+vals[3]+","+vals[4]);
                     int pageIndex = pagination.getCurrentPageIndex();
                     model.executeDocumentCommandWithNameAndArgs("AddBoxAnnotation",
-                            new String[]{Integer.toString(pageIndex), "36.0", "36.0", "72.0", "72.0"});
+                            new String[]{Integer.toString(pageIndex), vals[0], vals[1], vals[2], vals[3]});
                     refreshUserInterface();
                 }
             });
@@ -828,18 +1118,24 @@ public class AIRViewerController implements Initializable {
             addEllipseAnnotationMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
+		    ShowAnnotationDialog("AddEclipseAnnotation", String.valueOf(xInPage), String.valueOf(yInPage));
+                    String vals[] = annotationRet.split(",");
+                    System.out.println(vals[0]+","+vals[1]+","+vals[2]+","+vals[3]+","+vals[4]);
                     int pageIndex = pagination.getCurrentPageIndex();             
                     model.executeDocumentCommandWithNameAndArgs("AddCircleAnnotation",
-                            new String[]{Integer.toString(pageIndex), "288", "576", "144.0", "72.0", "Sample Text!"});
+                            new String[]{Integer.toString(pageIndex), vals[0], vals[1], vals[2], vals[3],vals[4]});
                     refreshUserInterface();
                 }
             });
             addTextAnnotationMenuItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
+		    ShowAnnotationDialog("AddTextAnnotation", String.valueOf(xInPage), String.valueOf(yInPage));
+                    String vals[] = annotationRet.split(",");
+	            System.out.println(vals[0]+","+vals[1]+","+vals[2]+","+vals[3]+","+vals[4]);
                     int pageIndex = pagination.getCurrentPageIndex();
                     model.executeDocumentCommandWithNameAndArgs("AddTextAnnotation",
-                            new String[]{Integer.toString(pageIndex), "36", "576", "144.0", "19.0", "A Bit More Sample Text!"});
+                            new String[]{Integer.toString(pageIndex), vals[0], vals[1], vals[2], vals[3],vals[4]});
                     
                     refreshUserInterface();
                 }
@@ -859,7 +1155,43 @@ public class AIRViewerController implements Initializable {
 
         return model;
     }
-
+	
+    // function that initialize scroller
+    private void initScroller() {
+        
+        scroller = new ScrollPane();
+        AnchorPane.setTopAnchor(scroller,0.0);
+        AnchorPane.setRightAnchor(scroller,0.0);
+        AnchorPane.setLeftAnchor(scroller,0.0);
+        AnchorPane.setBottomAnchor(scroller,70.0);
+    }
+     // function that update zoom factor value and update current imageview with updated zoom factor value
+    private void updateZoomFactor(){
+        if(zoomType==ZoomType.WIDTH){
+            if(model!=null&&model.getImage(pagination.getCurrentPageIndex())!=null){
+                zoomFactor=(float)((borderPane.getHeight()-20)/model.getImage(pagination.getCurrentPageIndex()).getWidth());
+            }
+        }
+        else if(zoomType==ZoomType.HEIGHT){
+            if(model!=null&&model.getImage(pagination.getCurrentPageIndex())!=null)
+                zoomFactor=(float)((borderPane.getHeight()-70)/model.getImage(pagination.getCurrentPageIndex()).getHeight());
+        }
+    }
+    public ZoomType getZoomType() {
+        return zoomType;
+    }
+    public void setZoomType(ZoomType zoomType) {
+        this.zoomType = zoomType;
+        updateZoomFactor();
+    }
+    public Boolean getZoomOptions() {
+        return zoomOptions;
+    }
+    public void setZoomOptions(Boolean zoomOptions) {
+        this.zoomOptions = zoomOptions;
+        updateToolbar();
+    }
+	    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -869,8 +1201,5 @@ public class AIRViewerController implements Initializable {
         stage.addEventHandler(WindowEvent.WINDOW_SHOWING, (WindowEvent window) -> {
             reinitializeWithModel(promptLoadModel(DEFAULT_PATH));
         });
-
-    }
-      
-  
+    } 
 }
